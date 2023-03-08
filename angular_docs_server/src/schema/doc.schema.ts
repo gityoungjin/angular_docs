@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { HydratedDocument } from "mongoose";
-import { Cate } from "./cate.schema";
+import { Chapter } from "./chapter.schema";
 
 @Schema({ timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } })
 export class Doc {
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Cate' })
-  cateId: Cate;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Chapter' })
+  chapterId: Chapter;
 
   @Prop({ type: Number, required: true, maxlength: 3 })
   order: number;

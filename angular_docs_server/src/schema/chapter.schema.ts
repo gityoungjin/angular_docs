@@ -3,7 +3,7 @@ import mongoose, { HydratedDocument } from "mongoose";
 import { Book } from "./book.schema";
 
 @Schema({ timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } })
-export class Cate {
+export class Chapter {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Book' })
   bookId: Book;
@@ -22,5 +22,5 @@ export class Cate {
 
 }
 
-export const CateSchema = SchemaFactory.createForClass(Cate);
-export type CateDocument = HydratedDocument<Cate>;
+export const ChapterSchema = SchemaFactory.createForClass(Chapter);
+export type ChapterDocument = HydratedDocument<Chapter>;
