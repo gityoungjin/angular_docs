@@ -1,7 +1,5 @@
-import { Board2Module } from './apis/board2/board2.module';
-import { ManagerModule } from './apis/manager/manager.module';
-import { BoardModule } from './apis/board/board.module';
-import { BlogModule } from './apis/blog/blog.module';
+import { DocModule } from './apis/doc/doc.module';
+import { ChapterModule } from './apis/chapter/chapter.module';
 import { AtGuard } from './common/guards/at.guard';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -9,18 +7,14 @@ import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { PostModule } from './apis/post/post.module';
-import { UserModule } from './apis/user/user.module';
 import { APP_GUARD } from '@nestjs/core';
-import { CommentModule } from './apis/comment/comment.module';
+import { BookModule } from './apis/book/book.module';
 
 @Module({
-  imports: [PostModule, 
-    UserModule,
-    BlogModule,
-    BoardModule,
-    Board2Module,
-    ManagerModule,
+  imports: [
+    BookModule,
+    ChapterModule,
+    DocModule,
     ConfigModule.forRoot({
     isGlobal: true,
       envFilePath:
@@ -48,7 +42,6 @@ import { CommentModule } from './apis/comment/comment.module';
       }),
       inject: [ConfigService],
     }),
-    CommentModule,
   ],
   controllers: [AppController],
   providers: [
