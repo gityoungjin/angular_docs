@@ -1,3 +1,4 @@
+import { CreateBookDto, UpdateBookDto } from './../../dto/book.dto';
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from 'mongoose';
@@ -11,4 +12,29 @@ export class BookService {
     private bookModel : Model<BookDocument>,
   ) {}
 
+  // 목록 조회
+  async selectBookList(): Promise<any[]> {
+    return await this.bookModel.find({ deletedAt: null });
   }
+
+  // 상세 조회
+  async selectBookDetail(_id: string): Promise<any> {
+    return await this.bookModel.findById({ _id, deletedAt: null});
+  }
+
+  // 등록
+  async insertBook(dto: CreateBookDto): Promise<any> {
+    return await this.bookModel.create(dto);
+  }
+
+  // 수정
+  async updateBook(_id: string, dto: UpdateBookDto): Promise<any> {
+    return await this.bookModel.findByIdAndUpdate(_id, dto);
+  }
+
+  // 삭제
+  async deleteBook(_id: string): Promise<any> {
+    return await this.bookModel.findByIdAndDelete(_id);
+  }
+
+}
