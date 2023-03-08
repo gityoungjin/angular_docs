@@ -1,11 +1,11 @@
 import { Controller } from "@nestjs/common";
-import { BookService } from "./book.service";
+import { DocService } from "./doc.service";
 
-@Controller("book")
-export class BookController {
+@Controller("doc")
+export class DocController {
 
   constructor(
-    private bookService: BookService,
+    private docService: DocService,
   ){}
 
   // 목록 조회
