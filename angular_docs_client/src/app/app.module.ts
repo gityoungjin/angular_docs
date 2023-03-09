@@ -7,6 +7,8 @@ import { BookFormPageComponent } from './feature/pages/book/form/book-form-page.
 import { BookListPageComponent } from './feature/pages/book/list/book-list-page.component';
 import { ChapterListPageComponent } from './feature/pages/chapter/list/chapter-list-page.component';
 import { HomePageComponent } from './feature/pages/home/home-page.component';
+import { ChapterComponent } from './shared/components/chapter/chapter.component';
+import { HomeComponent } from './feature/home/home/home.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { HomePageComponent } from './feature/pages/home/home-page.component';
     BookListPageComponent,
     HomePageComponent,
     ChapterListPageComponent,
-    BookFormPageComponent
+    BookFormPageComponent,
+    ChapterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
