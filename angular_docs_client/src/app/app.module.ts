@@ -1,20 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChapterComponent } from './shared/components/chapter/chapter.component';
-import { HomeComponent } from './feature/home/home/home.component';
-import { EditBookComponent } from './feature/edit/book/components/edit-book/edit-book.component';
-import { EditPageComponent } from './feature/edit/page/components/edit-page/edit-page.component';
+import { ChapterEditComponent } from './shared/components/chapter-edit/chapter-edit.component';
+import { HomeComponent } from './feature/home/home.component';
+import { DocEditComponent } from './feature/doc/doc-edit/doc-edit.component';
+import { DocComponent } from './feature/doc/doc.component';
+import { BookEditComponent } from './feature/book/book-edit/book-edit.component';
+import { BookComponent } from './feature/book/book.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChapterComponent,
+    ChapterEditComponent,
+
+    // home
     HomeComponent,
-    EditBookComponent,
-    EditPageComponent
+
+    // book
+    BookEditComponent,
+    BookComponent,
+
+    // doc
+    DocEditComponent,
+    DocComponent,
+
   ],
   imports: [
     BrowserModule,
