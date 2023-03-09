@@ -1,11 +1,11 @@
-import { EditPageComponent } from './feature/edit/page/components/edit-page/edit-page.component';
-import { EditBookComponent } from './feature/edit/book/components/edit-book/edit-book.component';
+import { DocEditComponent } from './feature/doc/doc-edit/doc-edit.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BookEditComponent } from './feature/book/book-edit/book-edit.component';
 
 const routes: Routes = [
-  { path: 'edit/book', component: EditBookComponent },
-  { path: 'edit/page', component: EditPageComponent },
+  { path: 'edit/book', component: BookEditComponent },
+  { path: 'edit/doc', component: DocEditComponent },
 ];
 
 @NgModule({
