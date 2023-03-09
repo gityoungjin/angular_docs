@@ -14,12 +14,16 @@ export class BookService {
 
   // 목록 조회
   async selectBookList(): Promise<any[]> {
-    return await this.bookModel.find({ deletedAt: null });
+    const list = await this.bookModel.find({ deletedAt: null });
+    console.log(list);
+    return list;
   }
 
   // 상세 조회
   async selectBookDetail(_id: string): Promise<any> {
-    return await this.bookModel.findById({ _id, deletedAt: null});
+    const detail = await this.bookModel.findById({ _id, deletedAt: null});
+    console.log(detail);
+    return detail;
   }
 
   // 등록

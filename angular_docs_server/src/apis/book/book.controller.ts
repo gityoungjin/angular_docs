@@ -1,4 +1,7 @@
-import { Controller } from "@nestjs/common";
+import { UpdateBookDto } from './../../dto/book.dto';
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Public } from "src/common/decorators";
+import { CreateBookDto } from "src/dto/book.dto";
 import { BookService } from "./book.service";
 
 @Controller("book")
@@ -8,14 +11,34 @@ export class BookController {
     private bookService: BookService,
   ){}
 
-  // 목록 조회
+  @Public()
+  @Get()
+  async selectBookList(): Promise<any []> {
+    return this.bookService.selectBookList();
+  }
+  
+  @Public()
+  @Get("/:id")
+  async selectBookDetail(@Param("id") _id: string) : Promise<any> {
+    return this.bookService.selectBookDetail(_id);
+  }
 
-  // 상세 조회
+  @Public()
+  @Post()
+  async insertBook(@Body() dto: CreateBookDto): Promise<any> {
+    return this.bookService.insertBook(dto);
+  }
 
-  // 등록
+  @Public()
+  @Put("/:id")
+  async updateBook(@Body() dto: UpdateBookDto, @Param("id") _id: string) : Promise<any> {
+    return this.bookService.updateBook(_id, dto);
+  }
 
-  // 수정
-
-  // 삭제
+  @Public()
+  @Delete("/:id")
+  async deleteBook(@Param("id") _id: string) : Promise<any> {
+    return this.bookService.deleteBook(_id);
+  }
 
 }
