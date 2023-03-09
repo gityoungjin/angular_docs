@@ -1,17 +1,19 @@
 import { PartialType } from "@nestjs/mapped-types";
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateBookDto{
 
   @IsString()
   title: string;
 
+  @IsOptional()
   @IsString()
   description: string;
 
   @IsString()
   author: string;
   
+  @IsOptional()
   @IsNumber()
   rating: number;
 

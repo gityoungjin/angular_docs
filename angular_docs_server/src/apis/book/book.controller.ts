@@ -24,6 +24,12 @@ export class BookController {
   }
 
   @Public()
+  @Post("/new")
+  async createNewBook(@Body("author") author: any): Promise<any> {
+    return this.bookService.createNewBook(author);
+  }
+
+  @Public()
   @Post()
   async insertBook(@Body() dto: CreateBookDto): Promise<any> {
     return this.bookService.insertBook(dto);

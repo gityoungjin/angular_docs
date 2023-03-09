@@ -9,6 +9,8 @@ import { DocComponent } from './feature/doc/doc.component';
 import { BookEditComponent } from './feature/book/book-edit/book-edit.component';
 import { BookComponent } from './feature/book/book.component';
 import { FormsModule } from '@angular/forms';
+import { TestComponent } from './feature/test/test.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { FormsModule } from '@angular/forms';
     // doc
     DocEditComponent,
     DocComponent,
+    TestComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

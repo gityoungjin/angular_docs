@@ -1,4 +1,6 @@
-import { Controller } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Public } from "src/common/decorators";
+import { CreateChapterDto, UpdateChapterDto } from "src/dto/chapter.dto";
 import { ChapterService } from "./chapter.service";
 
 @Controller("chapter")
@@ -8,14 +10,40 @@ export class ChapterController {
     private chapterService: ChapterService,
   ){}
 
-  // 목록 조회
+  @Public()
+  @Get()
+  async selectChapterList(): Promise<any []> {
+    return this.chapterService.selectChapterList();
+  }
+  
+  @Public()
+  @Get("/:id")
+  async selectChapterDetail(@Param("id") _id: string) : Promise<any> {
+    return this.chapterService.selectChapterDetail(_id);
+  }
 
-  // 상세 조회
+  @Public()
+  @Post("/new")
+  async craeteNewChapter(@Body() _id: string): Promise<any> {
+    return this.chapterService.createNewChapter(_id);
+  }
 
-  // 등록
+  @Public()
+  @Post()
+  async insertChapter(@Body() dto: CreateChapterDto): Promise<any> {
+    return this.chapterService.insertChapter(dto);
+  }
 
-  // 수정
+  @Public()
+  @Put("/:id")
+  async updateChapter(@Body() dto: UpdateChapterDto, @Param("id") _id: string) : Promise<any> {
+    return this.chapterService.updateChapter(_id, dto);
+  }
 
-  // 삭제
+  @Public()
+  @Delete("/:id")
+  async deleteChapter(@Param("id") _id: string) : Promise<any> {
+    return this.chapterService.deleteChapter(_id);
+  }
 
 }

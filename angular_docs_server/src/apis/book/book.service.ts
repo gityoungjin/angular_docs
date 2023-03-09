@@ -26,6 +26,14 @@ export class BookService {
     return detail;
   }
 
+  // 새로운 북 생성
+  async createNewBook(author: string): Promise<any> {
+    return await this.bookModel.create({
+      title: "New Book",
+      author,
+    })
+  }
+
   // 등록
   async insertBook(dto: CreateBookDto): Promise<any> {
     return await this.bookModel.create(dto);
