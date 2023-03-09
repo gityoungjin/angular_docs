@@ -3,7 +3,7 @@ import { IsNumber, IsString } from "class-validator";
 import mongoose from "mongoose";
 import { IsObjectId } from "src/common/decorators/is-object-id.decorator";
 
-export class CreateCateDto{
+export class CreateChapterDto{
 
   @IsObjectId()
   bookId: mongoose.Schema.Types.ObjectId;
@@ -21,4 +21,4 @@ export class CreateCateDto{
 
 }
 
-export class UpdateCateDto extends PartialType(CreateCateDto){}
+export class UpdateChapterDto extends PartialType(CreateChapterDto){}
