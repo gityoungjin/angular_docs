@@ -8,6 +8,6 @@ import { ChapterService } from './chapter.service';
   imports:[MongooseModule.forFeature([{ name: Chapter.name, schema: ChapterSchema }]),],
   controllers: [ChapterController],
   providers: [ChapterService],
-  exports: [],
+  exports: [ChapterService],
 })
 export class ChapterModule {};

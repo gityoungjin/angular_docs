@@ -14,8 +14,8 @@ export class ChapterService {
 
     
   // 목록 조회
-  async selectChapterList(): Promise<any[]> {
-    const list = await this.chapterModel.find({ deletedAt: null });
+  async selectChapterList(_id: string): Promise<any[]> {
+    const list = await this.chapterModel.find({ bookId: _id, deletedAt: null });
     console.log(list);
     return list;
   }
@@ -29,10 +29,16 @@ export class ChapterService {
 
   // 새로운 챕터 생성
   async createNewChapter(_id: string): Promise<any> {
+    const chapters = await this.chapterModel.find({ bookId: _id, deletedAt: null, level: 1 })
+    let order = 1;
+    if ( chapters ) {
+      order = chapters.length ? Math.max(...chapters.map(d => d.order)) : 0;
+    }
+
     return await this.chapterModel.create({
       bookId: _id,
       title: "New Chapter",
-      order: 1,
+      order: order + 1,
       level: 1
     });
   }

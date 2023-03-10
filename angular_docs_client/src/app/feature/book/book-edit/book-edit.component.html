@@ -1,14 +1,21 @@
 <div style="display: flex;">
   <span style="flex: 1; border-right: 1px solid black; box-sizing: border-box;">
-    <div>
-      <button (click)="createDoc()"> + 문서 추가 </button>
-    </div>
-    <ul>
-      <li>
-        chapter 1
-      </li>
-    </ul>
+    <app-chapter-edit [chapters]="chapters$" [book]="book"></app-chapter-edit>
   </span>
   <span style="flex: 2;">
+    <table>
+      <tr>
+        <th>책 제목</th>
+        <td>
+          <input type="text" [(ngModel)]="title" />
+        </td>
+      </tr>
+      <tr>
+        <th>요약</th>
+        <td>
+          <input type="text" [(ngModel)]="description" />
+        </td>
+      </tr>
+    </table>
   </span>
 </div>

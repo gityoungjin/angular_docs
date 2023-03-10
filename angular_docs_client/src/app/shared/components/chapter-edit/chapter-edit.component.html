@@ -1,1 +1,18 @@
-<p>chapter-edit works!</p>
+<div>
+  <button (click)="createDoc()"> + 문서 추가 </button>
+</div>
+<ul>
+  <li *ngIf="book">
+    <a routerLink="/edit/book/{{book._id}}">
+      {{book.title}}
+    </a>
+  </li>
+  <li *ngFor="let chapter of chapters | async">
+    <a routerLink="/edit/doc/{{chapter._id}}">
+      <span>
+        {{ '\t'.repeat(chapter.level) }}
+        {{ chapter.title }}
+      </span>
+    </a>
+  </li>
+</ul>

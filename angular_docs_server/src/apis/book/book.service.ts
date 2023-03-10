@@ -1,8 +1,9 @@
 import { CreateBookDto, UpdateBookDto } from './../../dto/book.dto';
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 import { Book, BookDocument } from 'src/schema/book.schema';
+import { ChapterService } from '../chapter/chapter.service';
 
 @Injectable()
 export class BookService {
@@ -10,6 +11,7 @@ export class BookService {
   constructor(
     @InjectModel(Book.name)
     private bookModel : Model<BookDocument>,
+    private readonly chapterService: ChapterService
   ) {}
 
   // 목록 조회
@@ -28,10 +30,14 @@ export class BookService {
 
   // 새로운 북 생성
   async createNewBook(author: string): Promise<any> {
-    return await this.bookModel.create({
+    const newBook = await this.bookModel.create({
       title: "New Book",
       author,
-    })
+    });
+
+    await this.chapterService.createNewChapter(newBook._id.toString());
+
+    return newBook;
   }
 
   // 등록

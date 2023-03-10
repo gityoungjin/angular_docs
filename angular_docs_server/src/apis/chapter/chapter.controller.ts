@@ -11,9 +11,9 @@ export class ChapterController {
   ){}
 
   @Public()
-  @Get()
-  async selectChapterList(): Promise<any []> {
-    return this.chapterService.selectChapterList();
+  @Get("/:id")
+  async selectChapterList(@Param("id") _id: string): Promise<any []> {
+    return this.chapterService.selectChapterList(_id);
   }
   
   @Public()
@@ -24,7 +24,7 @@ export class ChapterController {
 
   @Public()
   @Post("/new")
-  async craeteNewChapter(@Body() _id: string): Promise<any> {
+  async craeteNewChapter(@Body("_id") _id: string): Promise<any> {
     return this.chapterService.createNewChapter(_id);
   }
 

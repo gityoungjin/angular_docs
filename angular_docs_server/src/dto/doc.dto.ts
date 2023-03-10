@@ -6,7 +6,7 @@ import { IsObjectId } from "src/common/decorators/is-object-id.decorator";
 export class CreateDocDto{
 
   @IsObjectId()
-  cateId: mongoose.Schema.Types.ObjectId;
+  chapterId: mongoose.Schema.Types.ObjectId;
 
   @IsNumber()
   order: number;

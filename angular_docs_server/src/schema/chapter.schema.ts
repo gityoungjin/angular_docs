@@ -8,6 +8,9 @@ export class Chapter {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Book' })
   bookId: Book;
 
+  @Prop({ type:mongoose.Schema.Types.ObjectId, ref: 'Chapter' })
+  parentId: Chapter;
+
   @Prop({ type: String, required: true, trim: true, maxlength: 30 })
   title: string;
 

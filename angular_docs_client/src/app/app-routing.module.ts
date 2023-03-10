@@ -6,8 +6,8 @@ import { TestComponent } from './feature/test/test.component';
 
 const routes: Routes = [
   { path: 'test', component: TestComponent },
-  { path: 'edit/book', component: BookEditComponent },
-  { path: 'edit/doc', component: DocEditComponent },
+  { path: 'edit/book/:id', component: BookEditComponent },
+  { path: 'edit/doc/:id', component: DocEditComponent },
 ];
 
 @NgModule({
