@@ -40,10 +40,15 @@ export class PageEditComponent implements OnInit {
   constructor(private apiService: ApiService, private route: ActivatedRoute){ }
 
   ngOnInit(): void {
-    // 라우터 파라미터로부터 page-id 추출
-    const pageId = this.route.snapshot.paramMap.get("id");
+    this.route.params.subscribe(
+      params => {
+        const routeId = params["id"];
+        this.getPageData(routeId);
+      }
+    )
+  }
 
-    // page 상세 조회
+  getPageData(pageId: string) {
     this.apiService.get<Page>(`/page/${pageId}`).subscribe(
       data => {
         this.page = data;
@@ -74,6 +79,14 @@ export class PageEditComponent implements OnInit {
     this.apiService.post<Book>("/page/new", {bookId}).subscribe(
       value => this.pageSubject.next(value)
     )
+  }
+
+  save() {
+
+  }
+
+  delete() {
+    
   }
 
 }
