@@ -1,5 +1,3 @@
-import { DocModule } from './apis/doc/doc.module';
-import { ChapterModule } from './apis/chapter/chapter.module';
 import { AtGuard } from './common/guards/at.guard';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -9,12 +7,12 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { APP_GUARD } from '@nestjs/core';
 import { BookModule } from './apis/book/book.module';
+import { PageModule } from './apis/page/page.module';
 
 @Module({
   imports: [
     BookModule,
-    ChapterModule,
-    DocModule,
+    PageModule,
     ConfigModule.forRoot({
     isGlobal: true,
       envFilePath:

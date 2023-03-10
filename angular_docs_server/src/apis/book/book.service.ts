@@ -1,9 +1,9 @@
+import { PageService } from './../page/page.service';
 import { CreateBookDto, UpdateBookDto } from './../../dto/book.dto';
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model, ObjectId } from 'mongoose';
+import { Model } from 'mongoose';
 import { Book, BookDocument } from 'src/schema/book.schema';
-import { ChapterService } from '../chapter/chapter.service';
 
 @Injectable()
 export class BookService {
@@ -11,7 +11,7 @@ export class BookService {
   constructor(
     @InjectModel(Book.name)
     private bookModel : Model<BookDocument>,
-    private readonly chapterService: ChapterService
+    private readonly pageService: PageService
   ) {}
 
   // 목록 조회
@@ -35,7 +35,7 @@ export class BookService {
       author,
     });
 
-    await this.chapterService.createNewChapter(newBook._id.toString());
+    await this.pageService.createNewPage(newBook._id.toString());
 
     return newBook;
   }

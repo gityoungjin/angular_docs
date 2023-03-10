@@ -18,6 +18,8 @@ import { HomeContentComponent } from './shared/components/home-content/home-cont
 import { MaterialModule } from './material/material.module';
 import { BookListComponent } from './shared/components/book-list/book-list.component';
 import { BookListCardComponent } from './shared/components/book-list-card/book-list-card.component';
+import { PageEditComponent } from './feature/page/page-edit/page-edit.component';
+import { PageComponent } from './feature/page/page.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { BookListCardComponent } from './shared/components/book-list-card/book-l
     HomeContentComponent,
     BookListComponent,
     BookListCardComponent,
+    PageEditComponent,
+    PageComponent,
 
   ],
   imports: [

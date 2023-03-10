@@ -1,7 +1,7 @@
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/core/services/api.service';
 import { Observable, Subject } from 'rxjs';
+import { ApiService } from 'src/app/core/services/api.service';
 
 interface Book {
   _id: String;
@@ -26,30 +26,38 @@ interface Page {
 }
 
 @Component({
-  selector: 'app-book-edit',
-  templateUrl: './book-edit.component.html',
-  styleUrls: ['./book-edit.component.scss']
+  selector: 'app-page-edit',
+  templateUrl: './page-edit.component.html',
+  styleUrls: ['./page-edit.component.scss']
 })
-export class BookEditComponent implements OnInit {
+export class PageEditComponent implements OnInit {
 
   book!: Book;
+  page!: Page;
   pages$!: Observable<Page []>;
   pageSubject: Subject<Book> = new Subject<Book>();
 
   constructor(private apiService: ApiService, private route: ActivatedRoute){ }
 
   ngOnInit(): void {
+    // 라우터 파라미터로부터 page-id 추출
+    const pageId = this.route.snapshot.paramMap.get("id");
 
-    // 라우터 파라미터로부터 book-id 추출
-    const bookId = this.route.snapshot.paramMap.get("id");
+    // page 상세 조회
+    this.apiService.get<Page>(`/page/${pageId}`).subscribe(
+      data => {
+        this.page = data;
+        this.getBookData(data.bookId);
+        this.loadData(data.bookId);
+      }
+    ) 
+  }
 
-    // book-id로 book 상세 조회
+  // page - book-id로 book 상세 조회
+  getBookData(bookId: string) {
     this.apiService.get<Book>(`/book/${bookId}`).subscribe(
       data => this.book = data
     )
-
-    // book-id에 해당하는 page 목록 조회
-    this.loadData(bookId);
   }
 
   // page 로드

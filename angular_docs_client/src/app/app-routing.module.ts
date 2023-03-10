@@ -1,4 +1,4 @@
-import { DocEditComponent } from './feature/doc/doc-edit/doc-edit.component';
+import { PageEditComponent } from './feature/page/page-edit/page-edit.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BookEditComponent } from './feature/book/book-edit/book-edit.component';
@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'test', component: TestComponent },
   { path: 'edit/book/:id', component: BookEditComponent },
-  { path: 'edit/doc/:id', component: DocEditComponent },
+  { path: 'edit/page/:id', component: PageEditComponent },
 ];
 
 @NgModule({
