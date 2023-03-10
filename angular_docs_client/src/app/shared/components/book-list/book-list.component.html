@@ -1,0 +1,5 @@
+<mat-grid-list cols="4" gutterSize="16px">
+    <mat-grid-tile *ngFor="let book of books">
+        <app-book-list-card [book]="book"></app-book-list-card>
+    </mat-grid-tile>
+</mat-grid-list>

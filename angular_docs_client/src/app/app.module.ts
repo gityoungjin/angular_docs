@@ -11,6 +11,13 @@ import { BookComponent } from './feature/book/book.component';
 import { FormsModule } from '@angular/forms';
 import { TestComponent } from './feature/test/test.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeHeaderComponent } from './shared/components/home-header/home-header.component';
+import { HomeFooterComponent } from './shared/components/home-footer/home-footer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeContentComponent } from './shared/components/home-content/home-content.component';
+import { MaterialModule } from './material/material.module';
+import { BookListComponent } from './shared/components/book-list/book-list.component';
+import { BookListCardComponent } from './shared/components/book-list-card/book-list-card.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
 
     // home
     HomeComponent,
+    HomeHeaderComponent,
+    HomeFooterComponent,
 
     // book
     BookEditComponent,
@@ -28,6 +37,9 @@ import { HttpClientModule } from '@angular/common/http';
     DocEditComponent,
     DocComponent,
     TestComponent,
+    HomeContentComponent,
+    BookListComponent,
+    BookListCardComponent,
 
   ],
   imports: [
@@ -35,6 +47,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
