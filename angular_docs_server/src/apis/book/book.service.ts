@@ -15,9 +15,10 @@ export class BookService {
   ) {}
 
   // 목록 조회
-  async selectBookList(): Promise<any[]> {
-    const list = await this.bookModel.find({ deletedAt: null });
-    console.log(list);
+  async selectBookList(title): Promise<any[]> {
+    const list = await this.bookModel.find({ title: { 
+      $regex: title, $options: 'i'
+    }, deletedAt: null});
     return list;
   }
 

@@ -1,5 +1,5 @@
 import { UpdateBookDto } from './../../dto/book.dto';
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from "@nestjs/common";
 import { Public } from "src/common/decorators";
 import { CreateBookDto } from "src/dto/book.dto";
 import { BookService } from "./book.service";
@@ -13,8 +13,8 @@ export class BookController {
 
   @Public()
   @Get()
-  async selectBookList(): Promise<any []> {
-    return this.bookService.selectBookList();
+  async selectBookList(@Query('title') title: string): Promise<any []> {
+    return this.bookService.selectBookList(title);
   }
   
   @Public()

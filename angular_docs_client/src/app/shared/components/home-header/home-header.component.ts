@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BookApiService } from 'src/app/core/services/book-api.service';
 
 @Component({
   selector: 'app-home-header',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
 })
 export class HomeHeaderComponent {
 
-  constructor() { }
-  
+
+  constructor(
+    private bookApiService: BookApiService
+  ) { }
+
+  onSearchTitleChanged(searchTitle:string) {
+    this.bookApiService.setSearchTitle(searchTitle);
+  }
 }

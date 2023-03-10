@@ -20,6 +20,7 @@ import { BookListComponent } from './shared/components/book-list/book-list.compo
 import { BookListCardComponent } from './shared/components/book-list-card/book-list-card.component';
 import { PageEditComponent } from './feature/page/page-edit/page-edit.component';
 import { PageComponent } from './feature/page/page.component';
+import { PaginatorComponent } from './shared/components/paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { PageComponent } from './feature/page/page.component';
     BookListCardComponent,
     PageEditComponent,
     PageComponent,
+    PaginatorComponent,
 
   ],
   imports: [

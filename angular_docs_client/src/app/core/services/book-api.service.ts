@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Book } from 'src/app/shared/interfaces/book';
 
 @Injectable({
@@ -8,11 +8,12 @@ import { Book } from 'src/app/shared/interfaces/book';
 })
 export class BookApiService {
   private endpoint = '/book';
+  searchTitle$ = new BehaviorSubject<string>('');
 
   constructor(private apiService: ApiService) { }
 
-  getBooks(): Observable<Book[]> {
-    return this.apiService.get<Book[]>(this.endpoint);
+  getBooks(title:string): Observable<Book[]> {
+    return this.apiService.get<Book[]>(`${this.endpoint}?title=${title}`);
   }
 
   createBook(book: Book): Observable<Book> {
@@ -25,5 +26,9 @@ export class BookApiService {
 
   deleteBook(bookId: number): Observable<Book> {
     return this.apiService.delete<Book>(`${this.endpoint}/${bookId}`);
+  }
+
+  setSearchTitle(searchTitle: string) {
+    this.searchTitle$.next(searchTitle);
   }
 }

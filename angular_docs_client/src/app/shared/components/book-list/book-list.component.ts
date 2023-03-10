@@ -8,16 +8,25 @@ import { Book } from '../../interfaces/book';
   styleUrls: ['./book-list.component.scss']
 })
 export class BookListComponent {
-  
-  books: Book[] = []
-  searchTitle?: string;
+
+  books: Book[] = [];
+  displayedBooks: Book[] = [];
   constructor(private bookService: BookApiService) { }
 
   ngOnInit(): void {
-    this.bookService.getBooks().subscribe(books => {
-      this.books = books;
-    });
+    this.fetchBooks();
   }
 
+  fetchBooks() {
+    // this.bookService.searchTitle$.subscribe(searchTitle => {
+      this.bookService.getBooks('').subscribe(books => {
+        this.books = books;
+      });
+    // });
+  }
+
+  pageChanged(books: Book[]) {
+    this.displayedBooks = books;
+  }
 
 }
