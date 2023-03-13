@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectorRef } from '@angular/core';
 import { BookApiService } from 'src/app/core/services/book-api.service';
 import { Book } from '../../interfaces/book';
 
@@ -11,18 +11,22 @@ export class BookListComponent {
 
   books: Book[] = [];
   displayedBooks: Book[] = [];
-  constructor(private bookService: BookApiService) { }
+  // searchOption?: {title} = {};
+  constructor(private bookService: BookApiService, private cdref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.fetchBooks();
+    this.bookService.searchTitle$.subscribe(searchTitle => {
+      this.fetchBooks(searchTitle);
+    });
   }
 
-  fetchBooks() {
-    // this.bookService.searchTitle$.subscribe(searchTitle => {
-      this.bookService.getBooks('').subscribe(books => {
+  fetchBooks(searchTitle: string) {
+      this.bookService.getBooks(searchTitle).subscribe(books => {
         this.books = books;
+        console.log(books);
+        // ExpressionChangedAfterItHasBeenCheckedError 방지
+        this.cdref.detectChanges();
       });
-    // });
   }
 
   pageChanged(books: Book[]) {

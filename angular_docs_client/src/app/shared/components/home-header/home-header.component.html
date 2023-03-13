@@ -5,7 +5,7 @@
     <span>DDATZZIDOCS</span>
     <span class="example-spacer"></span>
     <mat-form-field>
-        <input matInput type="text" placeholder="Search..." #searchCtrl (change)="onSearchTitleChanged(searchCtrl.value)">
+        <input matInput type="text" placeholder="Search..." #searchCtrl (input)="onSearchTitleChanged(searchCtrl.value)">
         <!-- <button mat-icon-button>
             <mat-icon>search</mat-icon>
         </button> -->
