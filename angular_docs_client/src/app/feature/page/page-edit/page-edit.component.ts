@@ -1,5 +1,5 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api.service';
 
@@ -21,7 +21,7 @@ interface Page {
   content: string;
   order: number;
   level: number;
-  createaAt: Date;
+  createdAt: Date;
   updatedAt: Date;
 }
 
@@ -35,9 +35,9 @@ export class PageEditComponent implements OnInit {
   book!: Book;
   page!: Page;
   pages$!: Observable<Page []>;
-  pageSubject: Subject<Book> = new Subject<Book>();
+  pageSubject: Subject<Page> = new Subject<Page>();
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute){ }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router){ }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -76,17 +76,9 @@ export class PageEditComponent implements OnInit {
 
   // page 추가 - 추가한 후 page를 재로드 한다.
   createPage(bookId: string){
-    this.apiService.post<Book>("/page/new", {bookId}).subscribe(
+    this.apiService.post<Page>("/page/new", {bookId}).subscribe(
       value => this.pageSubject.next(value)
     )
-  }
-
-  save() {
-
-  }
-
-  delete() {
-    
   }
 
 }

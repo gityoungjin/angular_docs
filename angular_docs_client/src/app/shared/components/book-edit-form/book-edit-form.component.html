@@ -1,0 +1,14 @@
+<table *ngIf="book">
+  <tr>
+    <th>책 제목</th>
+    <td>
+      <input type="text" [(ngModel)]="book.title" />
+    </td>
+  </tr>
+  <tr>
+    <th>요약</th>
+    <td>
+      <input type="text" [(ngModel)]="book.description" />
+    </td>
+  </tr>
+</table>

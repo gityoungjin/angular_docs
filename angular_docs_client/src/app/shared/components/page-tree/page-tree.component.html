@@ -1,0 +1,17 @@
+<p>
+  <li *ngIf="book">
+    <a routerLink="/edit/book{{book._id}}">
+      <span>
+        {{book.title}}
+      </span>
+    </a>
+  </li>
+  <li *ngFor="let page of pageList">
+    <a routerLink="/edit/page/{{page._id}}">
+      <span>
+        {{ '\t'.repeat(page.level) }}
+        {{ page.title }}
+      </span>
+    </a>
+  </li>
+</p>

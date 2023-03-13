@@ -16,7 +16,13 @@ export class BookController {
   async selectBookList(@Query('title') title: string): Promise<any []> {
     return this.bookService.selectBookList(title);
   }
-  
+
+  @Public()
+  @Get("/book-id/:id")
+  async selectBookAndPageDataByBookId(@Param("id") id: string): Promise<any> {
+    return this.bookService.selectBookAndPageDataByBookId(id);
+  }
+
   @Public()
   @Get("/:id")
   async selectBookDetail(@Param("id") _id: string) : Promise<any> {

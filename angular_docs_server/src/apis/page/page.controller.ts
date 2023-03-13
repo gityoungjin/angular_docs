@@ -10,18 +10,10 @@ export class PageController {
     private pageService: PageService,
   ){}
   
-  // page-id에 해당하는 북 하위 모든 페이지 목록 조회
   @Public()
   @Get("/page-id/:id")
-  async selectPageListByPageId(@Param("id") pageId: string): Promise<any []> {
-    return this.pageService.selectPageListByPageId(pageId);
-  }
-
-  // book-id 하위 모든 페이지 목록 조회
-  @Public()
-  @Get("/book-id/:id")
-  async selectPageListByBookId(@Param("id") bookId: string ): Promise<any []> {
-    return this.pageService.selectPageListByBookId(bookId);
+  async selectBookAndPageDataByPageId(@Param("id") id: string): Promise<any> {
+    return this.pageService.selectBookAndPageDataByPageId(id);
   }
 
   // 상세 조회

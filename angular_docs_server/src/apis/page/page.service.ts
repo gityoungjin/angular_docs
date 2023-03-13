@@ -1,3 +1,5 @@
+import { Book } from 'src/schema/book.schema';
+import { BookDocument } from './../../schema/book.schema';
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from 'mongoose';
@@ -8,19 +10,22 @@ import { Page, PageDocument } from "src/schema/page.schema";
 export class PageService {
 
   constructor(
+    @InjectModel(Book.name)
+    private bookModel : Model<BookDocument>,
     @InjectModel(Page.name)
     private pageModel : Model<PageDocument>,
   ) {}
   
-  // page-id에 해당하는 북 하위 모든 페이지 목록 조회
-  async selectPageListByPageId(pageId: string): Promise<any[]> {
-    const page = await this.pageModel.findById({ _id: pageId });
-    return await this.pageModel.find({ bookId: page.bookId, deletedAt: null })
-  }
+  // page-id 로 조회
+  async selectBookAndPageDataByPageId(id: string): Promise<any> {
+    // 페이지 아이디로 북정보와 페이지 목록 조회
+    const page = await this.pageModel.findById({_id: id, deletedAt: null});
 
-  // book-id 하위 모든 페이지 목록 조회
-  async selectPageListByBookId(bookId: string): Promise<any[]> {
-    return await this.pageModel.find({ bookId, deletedAt: null });
+    const book = await this.bookModel.findById({_id: page.bookId, deletedAt: null});
+
+    const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null});
+
+    return {book, pageList};
   }
 
   // 상세 조회

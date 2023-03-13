@@ -1,38 +1,14 @@
-<div style="display: flex;">
+<!-- <div style="display: flex;">
   <span style="flex: 1; border-right: 1px solid black; box-sizing: border-box;">
     <div>
       <button (click)="createPage('{{book._id}}')"> + 문서 추가 </button>
     </div>
-    <ul>
-      <li *ngIf="book">
-        <a routerLink="/edit/book/{{book._id}}">
-          {{book.title}}
-        </a>
-      </li>
-      <li *ngFor="let page of pages$ | async">
-        <a routerLink="/edit/page/{{page._id}}">
-          <span>
-            {{ '\t'.repeat(page.level) }}
-            {{ page.title }}
-          </span>
-        </a>
-      </li>
-    </ul>
+    <app-page-tree [pages$]="pages$"></app-page-tree>
   </span>
-  <span style="flex: 2;" *ngIf="book">
-    <table>
-      <tr>
-        <th>책 제목</th>
-        <td>
-          <input type="text" [(ngModel)]="book.title" />
-        </td>
-      </tr>
-      <tr>
-        <th>요약</th>
-        <td>
-          <input type="text" [(ngModel)]="book.description" />
-        </td>
-      </tr>
-    </table>
+  <span style="flex: 2;">
+    <app-book-edit-form [book]="book"></app-book-edit-form>
   </span>
-</div>
+</div> -->
+<p>
+  this is book - edit
+</p>
