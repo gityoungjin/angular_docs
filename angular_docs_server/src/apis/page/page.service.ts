@@ -23,9 +23,20 @@ export class PageService {
 
     const book = await this.bookModel.findById({_id: page.bookId, deletedAt: null});
 
-    const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null});
+    // sorting 어캐하지.
+    /*
+      
+    */
+    const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null}).sort({level: 1, title: 1})
 
     return {book, pageList};
+  }
+
+  // id에 해당하는 부모 북의 자신을 제외한 하위 페이지 목록 조회
+  async selectSubPageList(id: string): Promise<any> {
+    const page = await this.pageModel.findById({_id: id, deletedAt: null});
+    const book = await this.bookModel.findById({_id: page.bookId, deletedAt: null});
+    return await this.pageModel.find({bookId: book._id, _id:{$ne: page._id}}).sort({level:1, title: 1});
   }
 
   // 상세 조회
@@ -37,18 +48,11 @@ export class PageService {
 
   // 새로운 페이지 생성
   async createNewPage(bookId: string): Promise<any> {
-    const pages = await this.pageModel.find({ bookId, deletedAt: null, level: 1 })
-    let order = 1;
-    if ( pages ) {
-      order = pages.length ? Math.max(...pages.map(d => d.order)) : 0;
-    }
-
     return await this.pageModel.create({
       bookId,
       title: "New Page",
-      order: order + 1,
       level: 1
-    });
+    })
   }
 
   // 등록
@@ -58,6 +62,14 @@ export class PageService {
 
   // 수정
   async updatePage(pageId: string, dto: UpdatePageDto): Promise<any> {
+    // parentId가 있으면 그 아이디로 검색해서 그 녀석의 레벨 +1로 수정
+    const parentId = dto.parentId;
+    if ( parentId ) {
+      const parentPage = await this.pageModel.findById({ _id: parentId, deletedAt: null });
+      const level = parentPage.level;
+
+      dto.level = level+1;
+    }
     return await this.pageModel.findByIdAndUpdate(pageId, dto);
   }
 

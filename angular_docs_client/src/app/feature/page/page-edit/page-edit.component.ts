@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DataTransferService } from './../../../shared/services/data-transfer.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 
@@ -11,10 +12,12 @@ export class PageEditComponent implements OnInit {
 
   routeParam!: any;
   page!: any;
+  subPageList!: any;
 
   constructor(
     private apiService: ApiService, 
     private route: ActivatedRoute,
+    private dataTransferService: DataTransferService,
   ){}
 
   ngOnInit(): void {
@@ -22,6 +25,7 @@ export class PageEditComponent implements OnInit {
     this.route.paramMap.subscribe(
       (params) => {
         this.routeParam = params.get("id");
+        this.getSubPageList();
         this.getPageEditData();
       }
     )
@@ -30,7 +34,13 @@ export class PageEditComponent implements OnInit {
 
   getPageEditData() {
     this.apiService.get(`/page/${this.routeParam}`).subscribe(
-      (data) => this.page = data
+      (data) => {this.page = data; console.log(data)}
+    )
+  }
+
+  getSubPageList() {
+    this.apiService.get(`/page/sub-pages/${this.routeParam}`).subscribe(
+      (data) => this.subPageList = data
     )
   }
 
@@ -38,9 +48,10 @@ export class PageEditComponent implements OnInit {
     const formData = {
       title: this.page.title,
       content: this.page.content,
+      parentId: this.page.parentId,
     }
     this.apiService.put(`/page/${this.page._id}`, formData).subscribe(
-      () => console.log(1)
+      () => this.dataTransferService.transferData({...formData, _id: this.page._id})
     )
   }
 

@@ -16,6 +16,13 @@ export class PageController {
     return this.pageService.selectBookAndPageDataByPageId(id);
   }
 
+  // id에 해당하는 부모 북의 자신을 제외한 하위 페이지 목록 조회
+  @Public()
+  @Get("/sub-pages/:id")
+  async selectSubPageList(@Param("id") id: string): Promise<any> {
+    return this.pageService.selectSubPageList(id);
+  }
+
   // 상세 조회
   @Public()
   @Get("/:id")

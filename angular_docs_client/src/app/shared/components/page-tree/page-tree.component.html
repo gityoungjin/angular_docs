@@ -8,8 +8,7 @@
   </li>
   <li *ngFor="let page of pageList">
     <a routerLink="/edit/page/{{page._id}}">
-      <span>
-        {{ '\t'.repeat(page.level) }}
+      <span [ngStyle]="{'padding-left': (page.level * 10) + 'px'}">
         {{ page.title }}
       </span>
     </a>

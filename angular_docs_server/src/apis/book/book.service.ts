@@ -50,16 +50,9 @@ export class BookService {
       author,
     });
 
-    const pages = await this.pageModel.find({ bookId: newBook._id, deletedAt: null });
-    let order = 1;
-    if ( pages ) {
-      order = pages.length ? Math.max(...pages.map(d => d.order)) : 0;
-    }
-
     await this.pageModel.create({
       bookId: newBook._id,
       title: "New Page",
-      order: order + 1,
       level: 1
     });
 

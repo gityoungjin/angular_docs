@@ -8,7 +8,7 @@ export class Page {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Book' })
   bookId: Book;
 
-  @Prop({ type:mongoose.Schema.Types.ObjectId, ref: 'Page' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Page' })
   parentId: Page;
 
   @Prop({ type: String, required: true, trim: true, maxlength: 30 })
@@ -16,9 +16,6 @@ export class Page {
 
   @Prop({ type: String, maxlength: 3000 })
   content: string;
-
-  @Prop({ type: Number, required: true, maxlength: 3 })
-  order: number;
 
   @Prop({ type: Number, required: true, maxlength: 3 })
   level: number;
