@@ -26,6 +26,16 @@ export class BookEditComponent implements OnInit {
     
   }
 
+  save() {
+    const formData = {
+      title: this.book.title,
+    }
+    this.apiService.put(`/book/${this.book._id}`, formData).subscribe(
+      () => location.reload()
+      // () => this.dataTransferService.transferData({...formData, _id: this.page._id})
+    )
+  }
+
   // book!: Book;
   // pages$!: Observable<Page []>;
   // pageSubject: Subject<Book> = new Subject<Book>();

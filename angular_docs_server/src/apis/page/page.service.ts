@@ -23,11 +23,7 @@ export class PageService {
 
     const book = await this.bookModel.findById({_id: page.bookId, deletedAt: null});
 
-    // sorting 어캐하지.
-    /*
-      
-    */
-    const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null}).sort({level: 1, title: 1})
+    const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null}).sort({title: 1, level: 1})
 
     return {book, pageList};
   }
@@ -36,14 +32,12 @@ export class PageService {
   async selectSubPageList(id: string): Promise<any> {
     const page = await this.pageModel.findById({_id: id, deletedAt: null});
     const book = await this.bookModel.findById({_id: page.bookId, deletedAt: null});
-    return await this.pageModel.find({bookId: book._id, _id:{$ne: page._id}}).sort({level:1, title: 1});
+    return await this.pageModel.find({bookId: book._id, _id:{$ne: page._id}}).sort({title: 1, level:1});
   }
 
   // 상세 조회
   async selectPageDetail(pageId: string): Promise<any> {
-    const detail = await this.pageModel.findById({ _id: pageId, deletedAt: null });
-    console.log(detail);
-    return detail;
+    return await this.pageModel.findById({ _id: pageId, deletedAt: null });
   }
 
   // 새로운 페이지 생성
@@ -75,7 +69,34 @@ export class PageService {
 
   // 삭제
   async deletePage(pageId: string): Promise<any> {
-    return await this.pageModel.findByIdAndDelete(pageId);
+    /*
+      pageId 에 해당되는 페이지를 조회한다.
+      해당 페이지 의 하위 페이지를 조회한다.
+      해당 페이지 의 하위 페이지를 조회한다.
+      반복...
+
+      없으면 끝
+    */
+    const page = await this.pageModel.findById({_id: pageId});
+    const pages = await this._getAllSubPages(page, []);
+  
+    pages.forEach( async (ele: any) => {
+      await this.pageModel.findByIdAndDelete(ele);
+    });
+
+    return pages;
+  }
+
+  async _getAllSubPages(page: any, pages: any) {
+    pages.push(page);
+    const childPage = await this.pageModel.find({parentId: page._id});
+    if ( childPage.length > 0 ){
+      for ( var i = 0; i < childPage.length; i++ ) {
+        await this._getAllSubPages(childPage[i], pages);
+      }
+    }
+
+    return pages;
   }
 
 }

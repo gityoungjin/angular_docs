@@ -1,6 +1,6 @@
 import { DataTransferService } from './../../../shared/services/data-transfer.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 
 @Component({
@@ -17,6 +17,7 @@ export class PageEditComponent implements OnInit {
   constructor(
     private apiService: ApiService, 
     private route: ActivatedRoute,
+    private router: Router,
     private dataTransferService: DataTransferService,
   ){}
 
@@ -34,13 +35,13 @@ export class PageEditComponent implements OnInit {
 
   getPageEditData() {
     this.apiService.get(`/page/${this.routeParam}`).subscribe(
-      (data) => {this.page = data; console.log(data)}
+      (data) => this.page = data
     )
   }
 
   getSubPageList() {
     this.apiService.get(`/page/sub-pages/${this.routeParam}`).subscribe(
-      (data) => this.subPageList = data
+      (data) => {this.subPageList = data;}
     )
   }
 
@@ -51,12 +52,19 @@ export class PageEditComponent implements OnInit {
       parentId: this.page.parentId,
     }
     this.apiService.put(`/page/${this.page._id}`, formData).subscribe(
-      () => this.dataTransferService.transferData({...formData, _id: this.page._id})
+      () => location.reload()
+      // () => this.dataTransferService.transferData({...formData, _id: this.page._id})
     )
   }
 
   delete() {
-    
+    this.apiService.delete(`/page/${this.page._id}`).subscribe(
+      () => {
+        this.router.navigateByUrl(`/edit/book/${this.page.bookId}`).then(
+          () => location.reload()
+        )
+      }
+    )
   }
 
   // book!: Book;

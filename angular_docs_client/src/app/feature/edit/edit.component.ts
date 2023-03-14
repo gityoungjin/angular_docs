@@ -19,7 +19,7 @@ export class EditComponent implements OnInit {
   constructor(
     private apiService: ApiService, 
     private route: ActivatedRoute,
-    private dataTransferService: DataTransferService,
+    // private dataTransferService: DataTransferService,
   ) {}
 
   ngOnInit(): void {
@@ -33,20 +33,20 @@ export class EditComponent implements OnInit {
     )
 
     this.apiService.get<any>(`/${this.routeData == 'book' ? 'book/book-id' : 'page/page-id'}/${this.routeParam}`).subscribe(
-      (value) => {this.book = value.book; this.pageList = value.pageList; console.log(this.pageList)}
+      (value) => {this.book = value.book; this.pageList = value.pageList;}
     )
 
-    this.dataTransferService.currentData.subscribe(
-      (data) => {
-        const changedData = this.pageList?.map((ele:any) => {
-          if ( ele._id == data._id ) {
-            ele.title = data.title
-          }
-          return ele;
-        })
-        this.pageList = changedData
-      }
-    )
+    // this.dataTransferService.currentData.subscribe(
+    //   (data) => {
+    //     const changedData = this.pageList?.map((ele:any) => {
+    //       if ( ele._id == data._id ) {
+    //         ele.title = data.title
+    //       }
+    //       return ele;
+    //     })
+    //     this.pageList = changedData
+    //   }
+    // )
   }
 
   createPage() {

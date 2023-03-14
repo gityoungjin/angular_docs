@@ -31,16 +31,14 @@ export class BookService {
     const book = await this.bookModel.findById({_id: id, deletedAt: null});
 
     // 페이지 목록
-    const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null});
+    const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null}).sort({title: 1, level: 1})
 
     return {book, pageList};
   }
 
   // 상세 조회
   async selectBookDetail(_id: string): Promise<any> {
-    const detail = await this.bookModel.findById({ _id, deletedAt: null});
-    console.log(detail);
-    return detail;
+    return await this.bookModel.findById({ _id, deletedAt: null});
   }
 
   // 새로운 북 생성

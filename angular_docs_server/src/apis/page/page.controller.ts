@@ -51,6 +51,7 @@ export class PageController {
     return this.pageService.updatePage(pageId, dto);
   }
 
+  // 삭제
   @Public()
   @Delete("/:id")
   async deletePage(@Param("id") pageId: string) : Promise<any> {
