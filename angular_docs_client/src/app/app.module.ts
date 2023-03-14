@@ -20,8 +20,6 @@ import { BookListCardComponent } from './shared/components/book-list-card/book-l
 import { PageEditComponent } from './feature/page/page-edit/page-edit.component';
 import { PageComponent } from './feature/page/page.component';
 import { PaginatorComponent } from './shared/components/paginator/paginator.component';
-import { PageEditFormComponent } from './shared/components/page-edit-form/page-edit-form.component';
-import { BookEditFormComponent } from './shared/components/book-edit-form/book-edit-form.component';
 import { PageTreeComponent } from './shared/components/page-tree/page-tree.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { EditComponent } from './feature/edit/edit.component';
@@ -49,8 +47,6 @@ import { EditComponent } from './feature/edit/edit.component';
     PageEditComponent,
     PageComponent,
     PaginatorComponent,
-    PageEditFormComponent,
-    BookEditFormComponent,
     PageTreeComponent,
     FooterComponent,
     EditComponent,

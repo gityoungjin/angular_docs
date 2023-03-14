@@ -1,14 +1,14 @@
-<!-- <div style="display: flex;">
-  <span style="flex: 1; border-right: 1px solid black; box-sizing: border-box;">
-    <div>
-      <button (click)="createPage('{{book._id}}')"> + 문서 추가 </button>
-    </div>
-    <app-page-tree [pages$]="pages$"></app-page-tree>
-  </span>
-  <span style="flex: 2;">
-    <app-book-edit-form [book]="book"></app-book-edit-form>
-  </span>
-</div> -->
-<p>
-  this is book - edit
-</p>
+<table *ngIf="book">
+  <tr>
+    <th>책 제목</th>
+    <td>
+      <input type="text" [(ngModel)]="book.title" />
+    </td>
+  </tr>
+  <tr>
+    <th>요약</th>
+    <td>
+      <input type="text" [(ngModel)]="book.description" />
+    </td>
+  </tr>
+</table>
