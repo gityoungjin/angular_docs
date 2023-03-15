@@ -23,29 +23,41 @@ export class PageService {
 
     const book = await this.bookModel.findById({_id: page.bookId, deletedAt: null});
 
-    const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null}).sort({title: 1, level: 1})
+    const pageList = await this.pageModel.aggregate([
+      {
+        $graphLookup: {
+          from: "pages",
+          startWith: "$_id",
+          connectFromField: "_id",
+          connectToField: "parentId",
+          as: "children",
+          depthField: "level"
+        },
+      },
+      {
+        $match: {
+          bookId: book._id,
+          deletedAt: null,
+        },
+      },
+      // {
+      //   $sort: {
+      //     title: 1,
+      //     level: 1
+      //   }
+      // }
+    ])
+    console.log(pageList)
+    // const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null}).sort({title: 1, level: 1})
 
     return {book, pageList};
   }
 
   // id에 해당하는 부모 북의 자신을 제외한 하위 페이지 목록 조회
   async selectSubPageList(id: string): Promise<any> {
-    // const page = await this.pageModel.findById({_id: id, deletedAt: null});
-    // const book = await this.bookModel.findById({_id: page.bookId, deletedAt: null});
-    // return await this.pageModel.find({bookId: book._id, _id:{$ne: page._id}}).sort({title: 1, level:1});
-    const data = await this.pageModel.aggregate([
-      {
-        $graphLookup: {
-          from: "Page",
-          startWith: "",
-          connectFromField: "parentId",
-          connectToField: "_id",
-          as: "children"
-        }
-      }
-    ])
-
-    console.log(data)
+    const page = await this.pageModel.findById({_id: id, deletedAt: null});
+    const book = await this.bookModel.findById({_id: page.bookId, deletedAt: null});
+    return await this.pageModel.find({bookId: book._id, _id:{$ne: page._id}}).sort({title: 1, level:1});
   }
 
   // 상세 조회

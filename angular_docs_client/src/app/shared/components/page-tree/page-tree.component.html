@@ -1,12 +1,22 @@
-<p>
-  <li *ngIf="book">
-    <div appPagePicker [pageId]="book._id" routerLink="/edit/book/{{book._id}}">
-      {{book.title}}
-    </div>
-  </li>
-  <li *ngFor="let page of pageList">
-    <div appPagePicker [pageId]="page._id" routerLink="/edit/page/{{page._id}}" [ngStyle]="{'padding-left': (page.level * 17) + 'px'}">
-      {{ page.title }}
-    </div>
-  </li>
-</p>
+<li *ngIf="book">
+  <div appPagePicker [pageId]="book._id" routerLink="/edit/book/{{book._id}}">
+    {{book.title}}
+  </div>
+</li>
+
+<!-- <li *ngFor="let page of pageList">
+  <div appPagePicker [pageId]="page._id" routerLink="/edit/page/{{page._id}}" [ngStyle]="{'padding-left': (page.level * 17) + 'px'}">
+    {{ page.title }}
+  </div>
+</li> -->
+
+<div *ngFor="let page of pageList">
+  <p *ngIf="page.level == 1">
+    {{page.title}}
+  </p>
+  <div *ngFor="let child of page.children">
+    <p >
+      {{child.title}}
+    </p>
+  </div>
+</div>

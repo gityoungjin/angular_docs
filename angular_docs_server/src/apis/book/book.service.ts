@@ -31,7 +31,32 @@ export class BookService {
     const book = await this.bookModel.findById({_id: id, deletedAt: null});
 
     // 페이지 목록
-    const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null}).sort({title: 1, level: 1})
+    const pageList = await this.pageModel.aggregate([
+      {
+        $graphLookup: {
+          from: "pages",
+          startWith: "$_id",
+          connectFromField: "_id",
+          connectToField: "parentId",
+          as: "children",
+          depthField: "level"
+        },
+      },
+      {
+        $match: {
+          bookId: book._id,
+          deletedAt: null,
+        },
+      },
+      // {
+      //   $sort: {
+      //     title: 1,
+      //     level: 1
+      //   }
+      // }
+    ])
+    console.log(pageList)
+    // const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null}).sort({title: 1, level: 1})
 
     return {book, pageList};
   }
