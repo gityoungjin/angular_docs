@@ -35,11 +35,11 @@ export class BookService {
       {
         $graphLookup: {
           from: "pages",
-          startWith: "$_id",
+          startWith: "$id",
           connectFromField: "_id",
           connectToField: "parentId",
           as: "children",
-          depthField: "level"
+          depthField: "depth",
         },
       },
       {
@@ -48,12 +48,12 @@ export class BookService {
           deletedAt: null,
         },
       },
-      // {
-      //   $sort: {
-      //     title: 1,
-      //     level: 1
-      //   }
-      // }
+      {
+        $sort: {
+          title: 1,
+          level: 1,
+        }
+      }
     ])
     console.log(pageList)
     // const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null}).sort({title: 1, level: 1})

@@ -2,7 +2,7 @@ import { Book } from 'src/schema/book.schema';
 import { BookDocument } from './../../schema/book.schema';
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 import { CreatePageDto, UpdatePageDto } from "src/dto/page.dto";
 import { Page, PageDocument } from "src/schema/page.schema";
 
@@ -27,11 +27,11 @@ export class PageService {
       {
         $graphLookup: {
           from: "pages",
-          startWith: "$_id",
+          startWith: "$id",
           connectFromField: "_id",
           connectToField: "parentId",
           as: "children",
-          depthField: "level"
+          depthField: "depth",
         },
       },
       {
@@ -40,12 +40,12 @@ export class PageService {
           deletedAt: null,
         },
       },
-      // {
-      //   $sort: {
-      //     title: 1,
-      //     level: 1
-      //   }
-      // }
+      {
+        $sort: {
+          title: 1,
+          level: 1,
+        }
+      }
     ])
     console.log(pageList)
     // const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null}).sort({title: 1, level: 1})
@@ -70,7 +70,8 @@ export class PageService {
     return await this.pageModel.create({
       bookId,
       title: "New Page",
-      level: 1
+      level: 1,
+      parentId: null,
     })
   }
 

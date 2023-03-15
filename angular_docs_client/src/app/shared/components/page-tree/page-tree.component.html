@@ -1,22 +1,19 @@
-<li *ngIf="book">
+<ng-container *ngIf="book">
   <div appPagePicker [pageId]="book._id" routerLink="/edit/book/{{book._id}}">
     {{book.title}}
   </div>
-</li>
+</ng-container>
 
-<!-- <li *ngFor="let page of pageList">
-  <div appPagePicker [pageId]="page._id" routerLink="/edit/page/{{page._id}}" [ngStyle]="{'padding-left': (page.level * 17) + 'px'}">
-    {{ page.title }}
-  </div>
-</li> -->
 
-<div *ngFor="let page of pageList">
-  <p *ngIf="page.level == 1">
-    {{page.title}}
-  </p>
-  <div *ngFor="let child of page.children">
-    <p >
-      {{child.title}}
-    </p>
-  </div>
-</div>
+<ng-template #recursiveList let-nodes>
+  <ng-container *ngFor="let node of nodes">
+    <div appPagePicker [pageId]="node._id" routerLink="/edit/page/{{node._id}}" [ngStyle]="{'padding-left': (node.level * 17) + 'px'}">
+      {{node.title}}
+    </div>
+    <ng-container *ngIf="node?.children?.length > 0">
+      <ng-container *ngTemplateOutlet="recursiveList; context: {$implicit: node.children}"></ng-container>
+    </ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: pageList}"></ng-container>
