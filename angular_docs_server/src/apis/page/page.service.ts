@@ -30,9 +30,22 @@ export class PageService {
 
   // id에 해당하는 부모 북의 자신을 제외한 하위 페이지 목록 조회
   async selectSubPageList(id: string): Promise<any> {
-    const page = await this.pageModel.findById({_id: id, deletedAt: null});
-    const book = await this.bookModel.findById({_id: page.bookId, deletedAt: null});
-    return await this.pageModel.find({bookId: book._id, _id:{$ne: page._id}}).sort({title: 1, level:1});
+    // const page = await this.pageModel.findById({_id: id, deletedAt: null});
+    // const book = await this.bookModel.findById({_id: page.bookId, deletedAt: null});
+    // return await this.pageModel.find({bookId: book._id, _id:{$ne: page._id}}).sort({title: 1, level:1});
+    const data = await this.pageModel.aggregate([
+      {
+        $graphLookup: {
+          from: "Page",
+          startWith: "",
+          connectFromField: "parentId",
+          connectToField: "_id",
+          as: "children"
+        }
+      }
+    ])
+
+    console.log(data)
   }
 
   // 상세 조회
@@ -69,14 +82,6 @@ export class PageService {
 
   // 삭제
   async deletePage(pageId: string): Promise<any> {
-    /*
-      pageId 에 해당되는 페이지를 조회한다.
-      해당 페이지 의 하위 페이지를 조회한다.
-      해당 페이지 의 하위 페이지를 조회한다.
-      반복...
-
-      없으면 끝
-    */
     const page = await this.pageModel.findById({_id: pageId});
     const pages = await this._getAllSubPages(page, []);
   

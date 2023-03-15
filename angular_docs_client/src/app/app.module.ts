@@ -23,6 +23,7 @@ import { PaginatorComponent } from './shared/components/paginator/paginator.comp
 import { PageTreeComponent } from './shared/components/page-tree/page-tree.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { EditComponent } from './feature/edit/edit.component';
+import { PagePickerDirective } from './shared/components/page-tree/page-picker.directive'
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { EditComponent } from './feature/edit/edit.component';
     PageTreeComponent,
     FooterComponent,
     EditComponent,
+    PagePickerDirective,
 
   ],
   imports: [
