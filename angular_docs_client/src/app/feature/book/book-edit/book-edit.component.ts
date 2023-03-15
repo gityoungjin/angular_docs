@@ -29,6 +29,7 @@ export class BookEditComponent implements OnInit {
   save() {
     const formData = {
       title: this.book.title,
+      description: this.book.description,
     }
     this.apiService.put(`/book/${this.book._id}`, formData).subscribe(
       () => location.reload()

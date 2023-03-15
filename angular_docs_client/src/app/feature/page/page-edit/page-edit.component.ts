@@ -35,13 +35,24 @@ export class PageEditComponent implements OnInit {
 
   getPageEditData() {
     this.apiService.get(`/page/${this.routeParam}`).subscribe(
-      (data) => this.page = data
+      (data) => {
+        this.page = data;
+      }
     )
   }
 
   getSubPageList() {
     this.apiService.get(`/page/sub-pages/${this.routeParam}`).subscribe(
-      (data) => {this.subPageList = data;}
+      (data) => {
+        this.subPageList = data; 
+        this.subPageList = [
+          {
+            _id: null,
+            title: '없음',
+          },
+          ...this.subPageList,
+        ]
+      }
     )
   }
 

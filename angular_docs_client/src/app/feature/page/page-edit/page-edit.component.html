@@ -9,7 +9,6 @@
     <th>부모 페이지</th>
     <td>
       <select [(ngModel)]="page.parentId">
-        <option [ngValue]="">없음</option>
         <option *ngFor="let subPage of subPageList" [ngValue]="subPage._id">{{subPage.title}}</option>
       </select>
     </td>
