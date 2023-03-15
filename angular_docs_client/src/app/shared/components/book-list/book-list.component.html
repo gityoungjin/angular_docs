@@ -1,7 +1,7 @@
 <mat-grid-list cols="4">
-    <mat-grid-tile *ngFor="let book of displayedBooks">
+    <mat-grid-tile *ngFor="let book of (displayedBooks$ | async)">
         <app-book-list-card [book]="book"></app-book-list-card>
     </mat-grid-tile>
 </mat-grid-list>
 
-<app-paginator [datas]="books" [pageSizeOptions]="[8,16]" [showPageSizeOptions]="true" (pageChanged)="pageChanged($event)"></app-paginator>
+<app-paginator [datas]="books$" [pageSizeOptions]="[8,16]" [showPageSizeOptions]="true" (pageChanged)="pageChanged($event)"></app-paginator>
