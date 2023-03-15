@@ -1,6 +1,5 @@
 import { Component, Input, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
 import { BookApiService } from 'src/app/core/services/book-api.service';
 import { Book } from '../../interfaces/book';
 
@@ -9,10 +8,10 @@ import { Book } from '../../interfaces/book';
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss']
 })
-export class BookListComponent {
+export class BookListComponent_array {
 
-  books$: Observable<Book[]> = of([]);
-  displayedBooks$: Observable<Book[]> = of([]);
+  books: Book[] = [];
+  displayedBooks: Book[] = [];
   constructor(private bookService: BookApiService, private cdref: ChangeDetectorRef, private router: Router) { }
 
   ngOnInit(): void {
@@ -22,11 +21,16 @@ export class BookListComponent {
   }
 
   fetchBooks(searchTitle: string) {
-    this.books$ = this.bookService.getBooks(searchTitle);
+      this.bookService.getBooks(searchTitle).subscribe(books => {
+        this.books = books;
+        console.log(books);
+        // ExpressionChangedAfterItHasBeenCheckedError 방지
+        this.cdref.detectChanges();
+      });
   }
 
-  pageChanged(displayedBooks: Observable<Book[]>) {
-    this.displayedBooks$ = displayedBooks;
+  pageChanged(books: Book[]) {
+    this.displayedBooks = books;
   }
 
   goToBookDetail(book: Book) {

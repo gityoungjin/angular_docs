@@ -12,6 +12,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   get<T>(endPoint: string): Observable<T> {
+    console.log("get"+`${this.BASE_URL}${endPoint}`);
     return this.http.get<T>(`${this.BASE_URL}${endPoint}`)
   }
 
