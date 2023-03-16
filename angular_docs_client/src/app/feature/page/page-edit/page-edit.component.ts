@@ -1,27 +1,34 @@
 import { DataTransferService } from './../../../shared/services/data-transfer.service';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
+import { Editor } from 'ngx-editor';
+import { toHTML } from 'ngx-editor';
 
 @Component({
   selector: 'app-page-edit',
   templateUrl: './page-edit.component.html',
   styleUrls: ['./page-edit.component.scss']
 })
-export class PageEditComponent implements OnInit {
+export class PageEditComponent implements OnInit, OnDestroy {
 
   routeParam!: any;
   page!: any;
   subPageList!: any;
+  markdownContent: any;
+  editor!: Editor;
+  html: any;
 
   constructor(
     private apiService: ApiService, 
     private route: ActivatedRoute,
     private router: Router,
     private dataTransferService: DataTransferService,
-  ){}
+  ){ }
 
   ngOnInit(): void {
+
+    this.editor = new Editor();
   
     this.route.paramMap.subscribe(
       (params) => {
@@ -31,6 +38,10 @@ export class PageEditComponent implements OnInit {
       }
     )
 
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
   }
 
   getPageEditData() {
@@ -59,9 +70,10 @@ export class PageEditComponent implements OnInit {
   save() {
     const formData = {
       title: this.page.title,
-      content: this.page.content,
+      content: toHTML(this.page.content),
       parentId: this.page.parentId,
     }
+
     this.apiService.put(`/page/${this.page._id}`, formData).subscribe(
       () => location.reload()
       // () => this.dataTransferService.transferData({...formData, _id: this.page._id})

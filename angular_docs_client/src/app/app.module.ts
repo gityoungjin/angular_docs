@@ -24,6 +24,7 @@ import { PageTreeComponent } from './shared/components/page-tree/page-tree.compo
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { EditComponent } from './feature/edit/edit.component';
 import { PagePickerDirective } from './shared/components/page-tree/page-picker.directive'
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { PagePickerDirective } from './shared/components/page-tree/page-picker.d
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    NgxEditorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
