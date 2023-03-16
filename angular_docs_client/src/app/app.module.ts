@@ -26,7 +26,10 @@ import { EditComponent } from './feature/edit/edit.component';
 import { PagePickerDirective } from './shared/components/page-tree/page-picker.directive'
 import { QuillModule } from 'ngx-quill';
 import { EllipsisPipe } from './shared/pipes/ellipsis.pipe';
-import { ButtonComponent } from './shared/components/button/button.component'
+import { ButtonComponent } from './shared/components/button/button.component';
+import { InputTextComponent } from './shared/components/input-text/input-text.component';
+import { TextareaComponent } from './shared/components/textarea/textarea.component';
+import { SelectboxComponent } from './shared/components/selectbox/selectbox.component'
 
 @NgModule({
   declarations: [
@@ -57,6 +60,9 @@ import { ButtonComponent } from './shared/components/button/button.component'
     PagePickerDirective,
     EllipsisPipe,
     ButtonComponent,
+    InputTextComponent,
+    TextareaComponent,
+    SelectboxComponent,
   ],
   imports: [
     BrowserModule,

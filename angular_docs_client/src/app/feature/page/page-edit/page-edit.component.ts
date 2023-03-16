@@ -62,7 +62,6 @@ export class PageEditComponent implements OnInit {
       content: this.page.content,
       parentId: this.page.parentId,
     }
-
     this.apiService.put(`/page/${this.page._id}`, formData).subscribe(
       () => location.reload()
       // () => this.dataTransferService.transferData({...formData, _id: this.page._id})

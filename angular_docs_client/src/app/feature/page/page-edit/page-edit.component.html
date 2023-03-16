@@ -1,29 +1,39 @@
-<table *ngIf="page">
-  <colgroup>
-    <col [width]="'10%'" />
-    <col [width]="'*'" />
-  </colgroup>
-  <tr>
-    <th>페이지 제목</th>
-    <td>
-      <input type="text" [(ngModel)]="page.title" [style.width]="'90%'" />
-    </td>
-  </tr>
-  <tr>
-    <th>부모 페이지</th>
-    <td>
-      <select [(ngModel)]="page.parentId">
-        <option *ngFor="let subPage of subPageList" [ngValue]="subPage._id">{{subPage.title}}</option>
-      </select>
-    </td>
-  </tr>
-  <tr>
-    <th>내용</th>
-    <td>
-      <quill-editor [(ngModel)]="page.content"></quill-editor>
-    </td>
-  </tr>
-</table>
+<div *ngIf="page">
+  <h2 style="display: inline">{{page.title}} </h2><label style="color: rgba(128,128,128,0.7)"> 페이지 수정</label>
 
-<button (click)="save()">저장</button>
-<button (click)="delete()">삭제</button>
+  <hr />
+  
+  <table>
+    <colgroup>
+      <col style="width: 15%;" />
+      <col style="width: 85%" />
+    </colgroup>
+    <tr>
+      <th>페이지 제목</th>
+      <td>
+        <app-input-text [(ngModel)]="page.title"/>
+      </td>
+    </tr>
+    <tr>
+      <th>부모 페이지</th>
+      <td>
+        <select [(ngModel)]="page.parentId">
+          <option *ngFor="let subPage of subPageList" [ngValue]="subPage._id">{{subPage.title}}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>내용</th>
+      <td>
+        <quill-editor [(ngModel)]="page.content"></quill-editor>
+      </td>
+    </tr>
+  </table>
+  
+  <hr />
+  
+  <div class="buttonArea">
+    <app-button (click)="save()" [label]="'저장'" />
+    <app-button (click)="delete()" [label]="'삭제'" />
+  </div>
+</div>

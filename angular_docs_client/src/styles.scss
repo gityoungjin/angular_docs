@@ -1,3 +1,7 @@
+* {
+  background-color: white;
+}
+
 html, body { 
   height: 100%; 
 }
@@ -14,7 +18,7 @@ a, a:link, a:hover {
 .ql-container {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px;
-  height: 300px;
+  height: 100%;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
