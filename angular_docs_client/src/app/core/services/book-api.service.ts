@@ -36,9 +36,4 @@ export class BookApiService {
   setSearchTitle(searchTitle: string) {
     this.searchTitle$.next(searchTitle);
   }
-  // setSearchTitle(searchTitle: string) {
-  //   this.searchTitle$.pipe(
-  //     map((value: any) => value)
-  //   );
-  // }
 }

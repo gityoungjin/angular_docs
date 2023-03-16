@@ -1,8 +1,13 @@
-<mat-tab-group>
-    <mat-tab label="all books" style="padding-top: 30px;">
-        <app-book-list></app-book-list>
-    </mat-tab>
-    <mat-tab label="search results">
-        <app-book-list></app-book-list>
-    </mat-tab>
+<mat-tab-group #tabGroup>
+  <mat-tab label="All Books" paddingTop="30px">
+    <app-book-list></app-book-list>
+  </mat-tab>
+  <div  #searchTab>
+      <mat-tab label="Search Results">
+        <app-book-list [searchOptions]="{title: true}"></app-book-list>
+      </mat-tab>
+  </div>
+  <mat-tab label="My Books">
+    <app-book-list [searchOptions]="{owner: true}"></app-book-list>
+  </mat-tab>
 </mat-tab-group>

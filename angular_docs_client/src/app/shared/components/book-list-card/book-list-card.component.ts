@@ -7,5 +7,5 @@ import { Book } from '../../interfaces/book';
   styleUrls: ['./book-list-card.component.scss']
 })
 export class BookListCardComponent {
-  @Input() book?: Book;
+  @Input() book!: Book;
 }
