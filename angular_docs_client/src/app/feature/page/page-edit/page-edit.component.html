@@ -1,8 +1,12 @@
 <table *ngIf="page">
+  <colgroup>
+    <col [width]="'10%'" />
+    <col [width]="'*'" />
+  </colgroup>
   <tr>
     <th>페이지 제목</th>
     <td>
-      <input type="text" [(ngModel)]="page.title" />
+      <input type="text" [(ngModel)]="page.title" [style.width]="'90%'" />
     </td>
   </tr>
   <tr>
@@ -16,8 +20,7 @@
   <tr>
     <th>내용</th>
     <td>
-      <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-      <ngx-editor [editor]="editor" [(ngModel)]="page.content" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+      <quill-editor [(ngModel)]="page.content"></quill-editor>
     </td>
   </tr>
 </table>

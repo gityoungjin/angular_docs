@@ -1,6 +1,37 @@
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
 a, a:link, a:hover {
-    color: inherit;
-    text-decoration: inherit;
-  }
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.ql-container {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  height: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.ql-toolbar {
+  border: none;
+  border-radius: 4px 4px 0 0;
+  background-color: #fff;
+}
+
+.ql-editor {
+  padding: 10px;
+  min-height: 400px;
+  border: none;
+  border-radius: 0 0 4px 4px;
+  box-sizing: border-box;
+  font-size: inherit;
+  line-height: inherit;
+  color: #333;
+}

@@ -2,22 +2,17 @@ import { DataTransferService } from './../../../shared/services/data-transfer.se
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
-import { Editor } from 'ngx-editor';
-import { toHTML } from 'ngx-editor';
 
 @Component({
   selector: 'app-page-edit',
   templateUrl: './page-edit.component.html',
   styleUrls: ['./page-edit.component.scss']
 })
-export class PageEditComponent implements OnInit, OnDestroy {
+export class PageEditComponent implements OnInit {
 
   routeParam!: any;
   page!: any;
   subPageList!: any;
-  markdownContent: any;
-  editor!: Editor;
-  html: any;
 
   constructor(
     private apiService: ApiService, 
@@ -27,8 +22,6 @@ export class PageEditComponent implements OnInit, OnDestroy {
   ){ }
 
   ngOnInit(): void {
-
-    this.editor = new Editor();
   
     this.route.paramMap.subscribe(
       (params) => {
@@ -38,10 +31,6 @@ export class PageEditComponent implements OnInit, OnDestroy {
       }
     )
 
-  }
-
-  ngOnDestroy(): void {
-    this.editor.destroy();
   }
 
   getPageEditData() {
@@ -70,7 +59,7 @@ export class PageEditComponent implements OnInit, OnDestroy {
   save() {
     const formData = {
       title: this.page.title,
-      content: toHTML(this.page.content),
+      content: this.page.content,
       parentId: this.page.parentId,
     }
 
@@ -89,54 +78,5 @@ export class PageEditComponent implements OnInit, OnDestroy {
       }
     )
   }
-
-  // book!: Book;
-  // page!: Page;
-  // pages$!: Observable<Page []>;
-  // pageSubject: Subject<Page> = new Subject<Page>();
-
-  // constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router){ }
-
-  // ngOnInit(): void {
-  //   this.route.params.subscribe(
-  //     params => {
-  //       const routeId = params["id"];
-  //       this.getPageData(routeId);
-  //     }
-  //   )
-  // }
-
-  // getPageData(pageId: string) {
-  //   this.apiService.get<Page>(`/page/${pageId}`).subscribe(
-  //     data => {
-  //       this.page = data;
-  //       this.getBookData(data.bookId);
-  //       this.loadData(data.bookId);
-  //     }
-  //   ) 
-  // }
-
-  // // page - book-id로 book 상세 조회
-  // getBookData(bookId: string) {
-  //   this.apiService.get<Book>(`/book/${bookId}`).subscribe(
-  //     data => this.book = data
-  //   )
-  // }
-
-  // // page 로드
-  // loadData(bookId: string | null) {
-  //   this.pages$ = this.apiService.get(`/page/book-id/${bookId}`);
-
-  //   this.pageSubject.subscribe(
-  //     () => this.loadData(bookId)
-  //   )
-  // }
-
-  // // page 추가 - 추가한 후 page를 재로드 한다.
-  // createPage(bookId: string){
-  //   this.apiService.post<Page>("/page/new", {bookId}).subscribe(
-  //     value => this.pageSubject.next(value)
-  //   )
-  // }
 
 }

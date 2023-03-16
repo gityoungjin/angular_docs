@@ -1,11 +1,11 @@
-<div style="display: flex;">
-  <span style="flex: 1; border-right: 1px solid black; box-sizing: border-box;">
+<div style="display: flex; border: 1px solid black;">
+  <span style="flex: 1; border-right: 1px solid black; box-sizing: border-box; overflow-x: scroll;">
     <div>
       <button (click)="createPage()"> + 문서 추가 </button>
     </div>
     <app-page-tree [book]="book" [pageList]="pageList" />
   </span>
-  <span style="flex: 2;">
+  <span style="flex: 4;">
     <router-outlet />
   </span>
 </div>

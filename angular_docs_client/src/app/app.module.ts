@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Directive } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +24,9 @@ import { PageTreeComponent } from './shared/components/page-tree/page-tree.compo
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { EditComponent } from './feature/edit/edit.component';
 import { PagePickerDirective } from './shared/components/page-tree/page-picker.directive'
-import { NgxEditorModule } from 'ngx-editor';
+import { QuillModule } from 'ngx-quill';
+import { EllipsisPipe } from './shared/pipes/ellipsis.pipe';
+import { ButtonComponent } from './shared/components/button/button.component'
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { NgxEditorModule } from 'ngx-editor';
     FooterComponent,
     EditComponent,
     PagePickerDirective,
-
+    EllipsisPipe,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,7 @@ import { NgxEditorModule } from 'ngx-editor';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    NgxEditorModule,
+    QuillModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
