@@ -1,4 +1,13 @@
 <div>
+  <div class="logo-container">
+    <div class="logo-wrapper">
+      <span class="logo" routerLink="/">DDATZZIDOCS</span>
+    </div>
+    <div class="logo-wrapper">
+      <app-button (clicked)="createPage()" [label]="' + 문서 추가'"/>
+    </div>
+  </div>
+  
   <ng-container *ngIf="book">
     <div class="page" appPagePicker [pageId]="book._id" routerLink="/edit/book/{{book._id}}">
       {{book.title | ellipsis: 20}}

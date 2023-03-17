@@ -10,11 +10,10 @@ import { DataTransferService } from 'src/app/shared/services/data-transfer.servi
 })
 export class EditComponent implements OnInit {
 
-  book!: any;
-  pageList!: any;
-  routeParam!: any;
-  routeData!: any;
-  childData!: any;
+  book!: any;       // book 상세정보
+  pageList!: any;   // page 목록
+  routeParam!: any; // 자식 라우트의 파라미터
+  routePath!: any;  // 자식 라우트의 패스
 
   constructor(
     private apiService: ApiService, 
@@ -24,15 +23,18 @@ export class EditComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // 자식 라우트로부터 라우트 파라미터("id") 추출
     this.route.children[0].paramMap.subscribe(
       (params) => this.routeParam = params.get("id")
     )
 
+    // 자식 라우트로부터 라우트 패스("path") 추출
     this.route.children[0].data.subscribe(
-      (data) => this.routeData = data["path"]
+      (data) => this.routePath = data["path"]
     )
 
-    this.apiService.get<any>(`/${this.routeData == 'book' ? 'book/book-id' : 'page/page-id'}/${this.routeParam}`).subscribe(
+    // book정보와 page 목록 가져오기
+    this.apiService.get<any>(`/${this.routePath == 'book' ? 'book/book-id' : 'page/page-id'}/${this.routeParam}`).subscribe(
       (value) => {
         this.book = value.book; 
         this.pageList = value.pageList;
@@ -50,14 +52,6 @@ export class EditComponent implements OnInit {
     //     this.pageList = changedData
     //   }
     // )
-  }
-
-  createPage() {
-    this.apiService.post(`/page/new`, {bookId: this.book._id}).subscribe(
-      (data:any) => {
-        this.pageList.push(data)
-      }
-    )
   }
 
 }

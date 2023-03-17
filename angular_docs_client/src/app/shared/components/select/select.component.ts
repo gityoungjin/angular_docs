@@ -54,7 +54,6 @@ export class SelectComponent implements ControlValueAccessor{
 
   writeValue(selectedOption: any) {
     this.selectedOption = selectedOption;
-    console.log(this.selectedOption)
   }
 
   registerOnChange(fn: any) {

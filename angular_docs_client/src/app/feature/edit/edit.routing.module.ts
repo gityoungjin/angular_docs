@@ -1,7 +1,7 @@
-import { PageEditComponent } from './../page/page-edit/page-edit.component';
-import { BookEditComponent } from './../book/book-edit/book-edit.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BookEditComponent } from 'src/app/shared/components/book-edit/book-edit.component';
+import { PageEditComponent } from 'src/app/shared/components/page-edit/page-edit.component';
 
 const routes: Routes = [
   { path: 'book/:id', data: {path: "book"}, component: BookEditComponent },

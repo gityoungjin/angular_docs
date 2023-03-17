@@ -3,12 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './feature/home/home.component';
-import { DocEditComponent } from './feature/doc/doc-edit/doc-edit.component';
-import { DocComponent } from './feature/doc/doc.component';
-import { BookEditComponent } from './feature/book/book-edit/book-edit.component';
 import { BookComponent } from './feature/book/book.component';
 import { FormsModule } from '@angular/forms';
-import { TestComponent } from './feature/test/test.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeHeaderComponent } from './shared/components/home-header/home-header.component';
 import { HomeFooterComponent } from './shared/components/home-footer/home-footer.component';
@@ -17,7 +13,6 @@ import { HomeContentComponent } from './shared/components/home-content/home-cont
 import { MaterialModule } from './material/material.module';
 import { BookListComponent } from './shared/components/book-list/book-list.component';
 import { BookListCardComponent } from './shared/components/book-list-card/book-list-card.component';
-import { PageEditComponent } from './feature/page/page-edit/page-edit.component';
 import { PageComponent } from './feature/page/page.component';
 import { PaginatorComponent } from './shared/components/paginator/paginator.component';
 import { PageTreeComponent } from './shared/components/page-tree/page-tree.component';
@@ -29,40 +24,50 @@ import { EllipsisPipe } from './shared/pipes/ellipsis.pipe';
 import { ButtonComponent } from './shared/components/button/button.component';
 import { InputTextComponent } from './shared/components/input-text/input-text.component';
 import { TextareaComponent } from './shared/components/textarea/textarea.component';
-import { SelectComponent } from './shared/components/select/select.component'
+import { SelectComponent } from './shared/components/select/select.component';
+import { BookEditComponent } from './shared/components/book-edit/book-edit.component';
+import { PageEditComponent } from './shared/components/page-edit/page-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-
-    // home
+    // ______________________________________________________feature
+    BookComponent,
+    EditComponent,
     HomeComponent,
+    PageComponent,
+    // ______________________________________________________feature
+    // ______________________________________________________shared
+    // home
+    HomeContentComponent,
     HomeHeaderComponent,
     HomeFooterComponent,
-
+    
     // book
     BookEditComponent,
-    BookComponent,
-
-    // doc
-    DocEditComponent,
-    DocComponent,
-    TestComponent,
-    HomeContentComponent,
     BookListComponent,
     BookListCardComponent,
+    
+    // page
     PageEditComponent,
-    PageComponent,
-    PaginatorComponent,
     PageTreeComponent,
+    
+    // layout
     FooterComponent,
-    EditComponent,
-    PagePickerDirective,
-    EllipsisPipe,
+    
+    // etc
     ButtonComponent,
     InputTextComponent,
     TextareaComponent,
     SelectComponent,
+    PaginatorComponent,
+    
+    // pipe
+    EllipsisPipe,
+    
+    // directive
+    PagePickerDirective,  // page의 특정 컴포넌트에서만 사용하기 때문에 이곳에 둘 이유가 없음
+    // ______________________________________________________shared
   ],
   imports: [
     BrowserModule,

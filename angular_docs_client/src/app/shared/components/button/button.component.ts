@@ -8,10 +8,12 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 export class ButtonComponent {
 
   @Input()
-  label!: string;
+  label!: string;   // 버튼명
+
   @Output()
   clicked: EventEmitter<any> = new EventEmitter();
 
+  // 부모이벤트 발생
   clickButton(event: any) {
     this.clicked.emit(event);
   }
