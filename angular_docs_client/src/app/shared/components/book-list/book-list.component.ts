@@ -20,7 +20,7 @@ export class BookListComponent {
   books$: Observable<Book[]> = of([]);
   displayedBooks$: Observable<Book[]> = of([]);
 
-  @Input() searchOptions?: SearchOptions = {
+  @Input() searchOptions: SearchOptions = {
     title: false,
     owner: false,
   };
@@ -36,7 +36,7 @@ export class BookListComponent {
       // ).subscribe(searchTitle => {
       //   this.fetchBooks(searchTitle);
       // });
-
+      
       //2. combineLatest 사용해서 필터링
       const searchTitle$ = this.bookService.searchTitle$.pipe(
         map(searchTitle => searchTitle ? searchTitle.trim().toLowerCase() : ''),
@@ -50,6 +50,7 @@ export class BookListComponent {
         })
       );
       //3. switchMap 사용해서 필터링
+      // switchMap: Observable을 Observable로 맵핑할때 사용
       // this.books$ = this.bookService.getBooks('').pipe(
       //   switchMap(books => this.bookService.searchTitle$.pipe(
       //     map(searchTitle => searchTitle ? searchTitle.trim().toLowerCase() : ''),
@@ -62,6 +63,9 @@ export class BookListComponent {
       // 구현해야함
     }
   }
+
+  ngOnDestroy(): void {
+  };
 
   fetchBooks(searchTitle: string) {
     this.books$ = this.bookService.getBooks(searchTitle);

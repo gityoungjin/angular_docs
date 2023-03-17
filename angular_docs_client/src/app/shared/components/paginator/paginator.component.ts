@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable, of, take } from 'rxjs';
 
 @Component({
   selector: 'app-paginator',
@@ -26,7 +26,7 @@ export class PaginatorComponent<T> {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['datas']) {
-      this.datas.subscribe(datas => {
+      this.datas.pipe(take(1)).subscribe(datas => {
         this.datasArray = datas;
         this.handlePageEvent({
           length: this.datasArray.length,
