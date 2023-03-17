@@ -1,4 +1,4 @@
-import { NgModule, Directive } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,7 +29,7 @@ import { EllipsisPipe } from './shared/pipes/ellipsis.pipe';
 import { ButtonComponent } from './shared/components/button/button.component';
 import { InputTextComponent } from './shared/components/input-text/input-text.component';
 import { TextareaComponent } from './shared/components/textarea/textarea.component';
-import { SelectboxComponent } from './shared/components/selectbox/selectbox.component'
+import { SelectComponent } from './shared/components/select/select.component'
 
 @NgModule({
   declarations: [
@@ -62,7 +62,7 @@ import { SelectboxComponent } from './shared/components/selectbox/selectbox.comp
     ButtonComponent,
     InputTextComponent,
     TextareaComponent,
-    SelectboxComponent,
+    SelectComponent,
   ],
   imports: [
     BrowserModule,

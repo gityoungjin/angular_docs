@@ -1,5 +1,5 @@
 <div *ngIf="page">
-  <h2 style="display: inline">{{page.title}} </h2><label style="color: rgba(128,128,128,0.7)"> 페이지 수정</label>
+  <h2 style="display: inline">{{pageTitle}} </h2><label style="color: rgba(128,128,128,0.7)"> 페이지 수정</label>
 
   <hr />
   
@@ -17,10 +17,7 @@
     <tr>
       <th>부모 페이지</th>
       <td>
-        <!-- <select [(ngModel)]="page.parentId">
-          <option *ngFor="let subPage of subPageList" [ngValue]="subPage._id">{{subPage.title}}</option>
-        </select> -->
-        <app-selectbox [(selectedOption)]="page.parentId" [options]="subPageList" optionValueField="_id" optionTextField="title" defaultOption="N"></app-selectbox>
+        <app-select [(selectedOption)]="page.parentId" [options]="subPageList" optionValueField="_id" optionTextField="title" defaultOption="N"></app-select>
       </td>
     </tr>
     <tr>

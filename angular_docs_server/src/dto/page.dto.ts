@@ -1,5 +1,5 @@
 import { PartialType } from "@nestjs/mapped-types";
-import { IsNumber, IsOptional, IsString } from "class-validator";
+import { IsArray, IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
 import mongoose from "mongoose";
 import { IsObjectId } from "src/common/decorators/is-object-id.decorator";
 

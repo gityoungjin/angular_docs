@@ -1,5 +1,5 @@
 import { DataTransferService } from './../../../shared/services/data-transfer.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 
@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/core/services/api.service';
 })
 export class PageEditComponent implements OnInit {
 
+  pageTitle!: string;
   routeParam!: any;
   page!: any;
   subPageList!: any;
@@ -37,6 +38,7 @@ export class PageEditComponent implements OnInit {
     this.apiService.get(`/page/${this.routeParam}`).subscribe(
       (data) => {
         this.page = data;
+        this.pageTitle = this.page.title;
       }
     )
   }

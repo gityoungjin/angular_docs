@@ -2,18 +2,18 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 
 @Component({
-  selector: 'app-selectbox',
-  templateUrl: './selectbox.component.html',
-  styleUrls: ['./selectbox.component.scss'],
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SelectboxComponent),
+      useExisting: forwardRef(() => SelectComponent),
       multi: true
     }
   ]
 })
-export class SelectboxComponent implements ControlValueAccessor{
+export class SelectComponent implements ControlValueAccessor{
 
   @Input()
   options!: any[];
