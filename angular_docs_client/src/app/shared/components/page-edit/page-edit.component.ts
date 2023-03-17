@@ -78,7 +78,7 @@ export class PageEditComponent implements OnInit {
     )
   }
 
-  // 페이지 저장 - 하위 자식 페이지 모두 삭제
+  // 페이지 삭제 - 하위 자식 페이지 모두 삭제
   delete() {
     this.apiService.delete(`/page/${this.page._id}`).subscribe(
       () => {
