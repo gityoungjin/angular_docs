@@ -26,7 +26,7 @@ export class PaginatorComponent<T> {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['datas']) {
-      this.datas.pipe(take(1)).subscribe(datas => {
+      this.datas.pipe().subscribe(datas => {
         this.datasArray = datas;
         this.handlePageEvent({
           length: this.datasArray.length,

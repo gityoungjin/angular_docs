@@ -1,7 +1,7 @@
 
 import { Component, Input, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, filter, map, distinctUntilChanged, debounceTime, combineLatest, switchMap } from 'rxjs';
+import { Observable, of, filter, map, distinctUntilChanged, debounceTime, combineLatest, switchMap, finalize } from 'rxjs';
 import { BookApiService } from 'src/app/core/services/book-api.service';
 import { Book } from '../../interfaces/book';
 
@@ -42,15 +42,19 @@ export class BookListComponent {
         map(searchTitle => searchTitle ? searchTitle.trim().toLowerCase() : ''),
         distinctUntilChanged()
       );
-      // combineLatest: 소스 관찰 가능 항목 중 하나가 새 값을 방출할 때마다 각 관찰 가능 소스에서 최신 값 배열을 방출하는 새 관찰 가능 항목이 생성
+      // combineLatest: 소스 Observable 항목 중 하나가 새 값을 방출할 때마다 각 Observable 소스에서 최신 값 배열을 방출하는 새 Observable 항목이 생성
       this.books$ = combineLatest([this.books$, searchTitle$]).pipe(
         map(([books, searchTitle]) => {
           console.log(books, searchTitle);
           return books.filter(book => book.title.toLowerCase().includes(searchTitle));
+        }),
+        finalize(()=>{
+          console.log("combineLatest complete");
         })
       );
       //3. switchMap 사용해서 필터링
       // switchMap: Observable을 Observable로 맵핑할때 사용
+      
       // this.books$ = this.bookService.getBooks('').pipe(
       //   switchMap(books => this.bookService.searchTitle$.pipe(
       //     map(searchTitle => searchTitle ? searchTitle.trim().toLowerCase() : ''),
@@ -68,7 +72,11 @@ export class BookListComponent {
   };
 
   fetchBooks(searchTitle: string) {
-    this.books$ = this.bookService.getBooks(searchTitle);
+    this.books$ = this.bookService.getBooks(searchTitle).pipe(
+      finalize(()=>{
+        console.log("fetchBooks complete");
+      })
+    );
   }
 
   pageChanged(displayedBooks: Observable<Book[]>) {

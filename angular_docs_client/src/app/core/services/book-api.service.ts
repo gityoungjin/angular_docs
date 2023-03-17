@@ -32,8 +32,13 @@ export class BookApiService {
   deleteBook(bookId: number): Observable<Book> {
     return this.apiService.delete<Book>(`${this.endpoint}/${bookId}`);
   }
-
   setSearchTitle(searchTitle: string) {
     this.searchTitle$.next(searchTitle);
+  }
+  completeSearchTitle() {
+    this.searchTitle$.complete();
+  }
+  createSearchTitle(){
+    this.searchTitle$ = new BehaviorSubject<string>('');
   }
 }
