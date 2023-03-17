@@ -47,6 +47,9 @@ export class SelectComponent implements ControlValueAccessor{
       case "N" :
         this.options.push({value: "", text: "없음"});
         break;
+      case "A" :
+        this.options.push({value: "", text: "전체"});
+        break;
     }
   }
 

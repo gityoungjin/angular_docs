@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './feature/home/home.component';
-import { BookComponent } from './feature/book/book.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeHeaderComponent } from './shared/components/home-header/home-header.component';
@@ -13,7 +12,6 @@ import { HomeContentComponent } from './shared/components/home-content/home-cont
 import { MaterialModule } from './material/material.module';
 import { BookListComponent } from './shared/components/book-list/book-list.component';
 import { BookListCardComponent } from './shared/components/book-list-card/book-list-card.component';
-import { PageComponent } from './feature/page/page.component';
 import { PaginatorComponent } from './shared/components/paginator/paginator.component';
 import { PageTreeComponent } from './shared/components/page-tree/page-tree.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
@@ -27,15 +25,15 @@ import { TextareaComponent } from './shared/components/textarea/textarea.compone
 import { SelectComponent } from './shared/components/select/select.component';
 import { BookEditComponent } from './shared/components/book-edit/book-edit.component';
 import { PageEditComponent } from './shared/components/page-edit/page-edit.component';
+import { ViewComponent } from './feature/view/view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     // ______________________________________________________feature
-    BookComponent,
-    EditComponent,
     HomeComponent,
-    PageComponent,
+    EditComponent,
+    ViewComponent,
     // ______________________________________________________feature
     // ______________________________________________________shared
     // home
