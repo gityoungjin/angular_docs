@@ -16,6 +16,7 @@ export class PageTreeComponent {
 
   constructor(private apiService: ApiService) {}
 
+  // 새로운 페이지 추가
   createPage() {
     this.apiService.post(`/page/new`, {bookId: this.book._id}).subscribe(
       (data:any) => {

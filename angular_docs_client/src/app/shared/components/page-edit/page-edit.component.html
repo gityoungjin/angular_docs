@@ -1,5 +1,5 @@
 <div *ngIf="page">
-  <h2 style="display: inline">{{pageTitle}} </h2><label style="color: rgba(128,128,128,0.7)"> 페이지 수정</label>
+  <h2 class="title">{{pageTitle}}</h2><label class="proc-title">페이지 수정</label>
 
   <hr />
   
@@ -31,7 +31,7 @@
   <hr />
   
   <div class="buttonArea">
-    <app-button (clicked)="saveData()" [label]="'저장'" />
-    <app-button (clicked)="deleteData()" [label]="'삭제'" />
+    <app-button (clicked)="save()" [label]="'저장'" />
+    <app-button (clicked)="delete()" [label]="'삭제'" />
   </div>
 </div>

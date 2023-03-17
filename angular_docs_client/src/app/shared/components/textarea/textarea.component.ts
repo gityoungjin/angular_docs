@@ -15,6 +15,7 @@ import { Component, forwardRef } from '@angular/core';
 })
 export class TextareaComponent implements ControlValueAccessor{
 
+  // 입력한 값
   value!: string;
   
   private onChangeCallback: (_: any) => void = () => {};

@@ -1,5 +1,5 @@
 import { DataTransferService } from './../../../shared/services/data-transfer.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 
@@ -10,10 +10,10 @@ import { ApiService } from 'src/app/core/services/api.service';
 })
 export class PageEditComponent implements OnInit {
 
-  pageTitle!: string;
-  routeParam!: any;
-  page!: any;
-  subPageList!: any;
+  page!: any;         // 페이지 상세
+  pageTitle!: string; // 페이지 제목
+  routeParam!: any;   // 라우트 파라미터
+  subPageList!: any;  // 자신을 제외한 모든 페이지 목록 ( 부모 페이지 셀렉트박스 )
 
   constructor(
     private apiService: ApiService, 
@@ -24,16 +24,21 @@ export class PageEditComponent implements OnInit {
 
   ngOnInit(): void {
   
+    // 라우트 파라미터가 변경될때마다 실행
     this.route.paramMap.subscribe(
       (params) => {
+        // 라우트 파라미터 추출
         this.routeParam = params.get("id");
+        // 자신을 제외한 페이지 목록 조회
         this.getSubPageList();
+        // 페이지 상세정보 조회
         this.getPageEditData();
       }
     )
 
   }
 
+  // 페이지 상세 정보 조회
   getPageEditData() {
     this.apiService.get(`/page/${this.routeParam}`).subscribe(
       (data) => {
@@ -43,6 +48,7 @@ export class PageEditComponent implements OnInit {
     )
   }
 
+  // 자신을 제외한 페이지 목록 조회
   getSubPageList() {
     this.apiService.get(`/page/sub-pages/${this.routeParam}`).subscribe(
       (data) => {
@@ -58,7 +64,8 @@ export class PageEditComponent implements OnInit {
     )
   }
 
-  saveData() {
+  // 페이지 저장
+  save() {
     const formData = {
       title: this.page.title,
       content: this.page.content,
@@ -71,7 +78,8 @@ export class PageEditComponent implements OnInit {
     )
   }
 
-  deleteData() {
+  // 페이지 저장 - 하위 자식 페이지 모두 삭제
+  delete() {
     this.apiService.delete(`/page/${this.page._id}`).subscribe(
       () => {
         this.router.navigateByUrl(`/edit/book/${this.page.bookId}`).then(

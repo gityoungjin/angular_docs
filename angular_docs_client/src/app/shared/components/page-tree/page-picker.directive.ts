@@ -1,4 +1,4 @@
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { filter, first } from 'rxjs';
 
@@ -7,13 +7,24 @@ import { filter, first } from 'rxjs';
 })
 export class PagePickerDirective implements OnDestroy, OnInit{
   
-  constructor(private router: Router, private route: ActivatedRoute, private el: ElementRef) { }
-  
+  // 현재 page id(== book id)
   @Input('pageId')
   pageId: any;
-  paramValue: any;
-  private routeSub: any;
 
+  // 라우트 파라미터로부터 추출한 page id(== book id)
+  paramValue: any;
+
+  // 시발뭐더라이게 ?
+  private routeSub: any;
+  
+  constructor(
+    private router: Router, 
+    private route: ActivatedRoute, 
+    // 현재 요소
+    private el: ElementRef
+  ) { }
+
+  // "mouse-enter"시 해당 페이지 스타일 변경
   @HostListener('mouseenter') 
   onMouseEnter() {
     if ( this.pageId == this.paramValue ) {
@@ -23,6 +34,7 @@ export class PagePickerDirective implements OnDestroy, OnInit{
     this.el.nativeElement.style.color = 'white'
   }
 
+  // "mouse-leave"시 해당 페이지 스타일 변경
   @HostListener('mouseleave')
   onMouseLeave() {
     if ( this.pageId == this.paramValue ) {
@@ -34,12 +46,15 @@ export class PagePickerDirective implements OnDestroy, OnInit{
 
   
   ngOnInit(): void {
+
+    // 라우트 파라미터로부터 id 추출
     this.route.children[0].paramMap.pipe(first()).subscribe((params) => {
       this.paramValue = params.get('id');
       
       this.highlight();
     })
 
+    // 시발뭐지이게?
     this.routeSub = this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd)
     ).subscribe(() => {
