@@ -10,10 +10,10 @@ export class ButtonComponent {
   @Input()
   label!: string;
   @Output()
-  click: EventEmitter<any> = new EventEmitter();
+  clicked: EventEmitter<any> = new EventEmitter();
 
-  clickButton() {
-    this.click.emit();
+  clickButton(event: any) {
+    this.clicked.emit(event);
   }
 
 }

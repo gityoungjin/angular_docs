@@ -33,7 +33,10 @@ export class EditComponent implements OnInit {
     )
 
     this.apiService.get<any>(`/${this.routeData == 'book' ? 'book/book-id' : 'page/page-id'}/${this.routeParam}`).subscribe(
-      (value) => {this.book = value.book; this.pageList = value.pageList;}
+      (value) => {
+        this.book = value.book; 
+        this.pageList = value.pageList;
+      }
     )
 
     // this.dataTransferService.currentData.subscribe(

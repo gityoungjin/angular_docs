@@ -1,6 +1,6 @@
 <div>
   <ng-container *ngIf="book">
-    <div appPagePicker [pageId]="book._id" routerLink="/edit/book/{{book._id}}">
+    <div class="page" appPagePicker [pageId]="book._id" routerLink="/edit/book/{{book._id}}">
       {{book.title | ellipsis: 20}}
     </div>
   </ng-container>
@@ -8,7 +8,7 @@
   
   <ng-template #recursiveList let-nodes>
     <ng-container *ngFor="let node of nodes">
-      <div appPagePicker [pageId]="node._id" routerLink="/edit/page/{{node._id}}" [ngStyle]="{'padding-left': (node.level * 17) + 'px'}">
+      <div class="page" appPagePicker [pageId]="node._id" routerLink="/edit/page/{{node._id}}" [ngStyle]="{'padding-left': (node.level * 17) + 'px'}">
         {{node.title | ellipsis: 20}}
       </div>
       <ng-container *ngIf="node?.children?.length > 0">

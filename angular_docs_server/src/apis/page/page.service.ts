@@ -95,8 +95,11 @@ export class PageService {
 
   // 삭제
   async deletePage(pageId: string): Promise<any> {
+    console.log(11111)
     const page = await this.pageModel.findById({_id: pageId});
+    console.log('page', page)
     const pages = await this._getAllSubPages(page, []);
+    console.log('pages', pages)
   
     pages.forEach( async (ele: any) => {
       await this.pageModel.findByIdAndDelete(ele);

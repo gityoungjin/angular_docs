@@ -1,5 +1,5 @@
 import { DataTransferService } from './../../../shared/services/data-transfer.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/core/services/api.service';
 
@@ -56,19 +56,20 @@ export class PageEditComponent implements OnInit {
     )
   }
 
-  save() {
+  saveData() {
     const formData = {
       title: this.page.title,
       content: this.page.content,
       parentId: this.page.parentId,
     }
+
     this.apiService.put(`/page/${this.page._id}`, formData).subscribe(
       () => location.reload()
       // () => this.dataTransferService.transferData({...formData, _id: this.page._id})
     )
   }
 
-  delete() {
+  deleteData() {
     this.apiService.delete(`/page/${this.page._id}`).subscribe(
       () => {
         this.router.navigateByUrl(`/edit/book/${this.page.bookId}`).then(
@@ -77,5 +78,5 @@ export class PageEditComponent implements OnInit {
       }
     )
   }
-
+  
 }

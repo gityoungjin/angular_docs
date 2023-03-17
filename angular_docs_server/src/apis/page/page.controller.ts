@@ -55,6 +55,7 @@ export class PageController {
   @Public()
   @Delete("/:id")
   async deletePage(@Param("id") pageId: string) : Promise<any> {
+    console.log(2222222)
     return this.pageService.deletePage(pageId);
   }
 
