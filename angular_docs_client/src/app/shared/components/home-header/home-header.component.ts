@@ -13,6 +13,12 @@ export class HomeHeaderComponent {
     private bookApiService: BookApiService
   ) { }
 
+  ngOnInit(): void {
+    this.bookApiService.createSearchTitle();
+  }
+  ngOnDestroy(): void {
+    this.bookApiService.completeSearchTitle();
+  }
   onSearchTitleChanged(searchTitle:string) {
     this.bookApiService.setSearchTitle(searchTitle);
   }
