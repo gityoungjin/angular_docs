@@ -2,7 +2,7 @@ import { Book } from 'src/schema/book.schema';
 import { BookDocument } from './../../schema/book.schema';
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model, ObjectId } from 'mongoose';
+import { Model } from 'mongoose';
 import { CreatePageDto, UpdatePageDto } from "src/dto/page.dto";
 import { Page, PageDocument } from "src/schema/page.schema";
 
@@ -60,6 +60,27 @@ export class PageService {
     return await this.pageModel.find({bookId: book._id, _id:{$ne: page._id}}).sort({title: 1, level:1});
   }
 
+  // id에 해당하는 상위 모든 부모 페이지 트리형식으로 조회 - 북까지 조회
+  async selectTreePageList(id: string): Promise<any> {
+    const page = await this.pageModel.findById({_id: id, deletedAt: null});
+    const pages = await this._getParentPages(page, []);
+    const book = await this.bookModel.findById({_id: page.bookId, deletedAt: null});
+    
+    return {pages: pages.reverse(), book};
+  }
+
+  // 최상위 페이지 까지 모두 조회
+  async _getParentPages(page: any, pages: any) {
+    pages.push(page);
+
+    if ( page.parentId ){
+      const parentPage = await this.pageModel.findById({_id: page.parentId, deletedAt: null});
+      await this._getParentPages(parentPage, pages);
+    }
+
+    return pages;
+  }
+
   // 상세 조회
   async selectPageDetail(pageId: string): Promise<any> {
     return await this.pageModel.findById({ _id: pageId, deletedAt: null });
@@ -95,11 +116,8 @@ export class PageService {
 
   // 삭제
   async deletePage(pageId: string): Promise<any> {
-    console.log(11111)
     const page = await this.pageModel.findById({_id: pageId});
-    console.log('page', page)
     const pages = await this._getAllSubPages(page, []);
-    console.log('pages', pages)
   
     pages.forEach( async (ele: any) => {
       await this.pageModel.findByIdAndDelete(ele);

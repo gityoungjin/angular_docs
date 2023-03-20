@@ -23,6 +23,13 @@ export class PageController {
     return this.pageService.selectSubPageList(id);
   }
 
+  // id에 해당하는 상위 모든 부모 페이지 트리형식으로 조회 - 북까지 조회
+  @Public()
+  @Get("/tree-pages/:id")
+  async selectTreePageList(@Param("id") id: string): Promise<any> {
+    return this.pageService.selectTreePageList(id);
+  }
+
   // 상세 조회
   @Public()
   @Get("/:id")

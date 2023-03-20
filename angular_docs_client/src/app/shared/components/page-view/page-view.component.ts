@@ -10,9 +10,11 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class PageViewComponent implements OnInit {
 
+  book: any;
   page!: any;             // 페이지 상세
   safeContent!: SafeHtml; // 내용
   routeParam!: any;       // 라우트 파라미터
+  pageTree!: any;         // 현재 페이지의 부모페이지들 트리
 
   constructor(
     private apiService: ApiService, 
@@ -28,6 +30,7 @@ export class PageViewComponent implements OnInit {
         // 라우트 파라미터 추출
         this.routeParam = params.get("id");
         this.getData();
+        this.getPageTree();
       }
     )
 
@@ -42,6 +45,16 @@ export class PageViewComponent implements OnInit {
         if ( this.page.content ) {
           this.safeContent = this.sanitizer.bypassSecurityTrustHtml(this.page.content);
         }
+      }
+    )
+  }
+
+  // 부모 페이지 및 최상위 북 조회
+  getPageTree() {
+    this.apiService.get(`/page/tree-pages/${this.routeParam}`).subscribe(
+      (data: any) => {
+        this.pageTree = data.pages;
+        this.book = data.book;
       }
     )
   }
