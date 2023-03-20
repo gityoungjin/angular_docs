@@ -8,11 +8,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { APP_GUARD } from '@nestjs/core';
 import { BookModule } from './apis/book/book.module';
 import { PageModule } from './apis/page/page.module';
+import { UserModule } from './apis/user/user.module';
 
 @Module({
   imports: [
     BookModule,
     PageModule,
+    UserModule,
     ConfigModule.forRoot({
     isGlobal: true,
       envFilePath:
