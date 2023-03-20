@@ -1,7 +1,7 @@
 
 import { Component, Input, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, filter, map, distinctUntilChanged, debounceTime, combineLatest, switchMap, finalize } from 'rxjs';
+import { Observable, of, filter, map, distinctUntilChanged, debounceTime, combineLatest, switchMap, finalize, mergeMap, tap, concatMap } from 'rxjs';
 import { BookApiService } from 'src/app/core/services/book-api.service';
 import { Book } from '../../interfaces/book';
 
@@ -48,6 +48,7 @@ export class BookListComponent {
           console.log(books, searchTitle);
           return books.filter(book => book.title.toLowerCase().includes(searchTitle));
         }),
+        tap(()=>console.log('combineLatest tap')),
         finalize(()=>{
           console.log("combineLatest complete");
         })
@@ -55,11 +56,13 @@ export class BookListComponent {
       //3. switchMap 사용해서 필터링
       // switchMap: Observable을 Observable로 맵핑할때 사용
       
-      // this.books$ = this.bookService.getBooks('').pipe(
+      // this.books$ = this.books$.pipe(
       //   switchMap(books => this.bookService.searchTitle$.pipe(
       //     map(searchTitle => searchTitle ? searchTitle.trim().toLowerCase() : ''),
       //     distinctUntilChanged(),
-      //     map(searchTitle => books.filter(book => book.title.toLowerCase().includes(searchTitle)))
+      //     map(searchTitle => books.filter(book => book.title.toLowerCase().includes(searchTitle))),
+      //     tap(()=>console.log('switchMap tap')),
+      //     finalize(()=>console.log('switchMap complete'))
       //   ))
       // );
     }

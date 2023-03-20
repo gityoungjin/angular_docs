@@ -9,11 +9,6 @@ import { Book } from 'src/app/shared/interfaces/book';
 export class BookApiService {
   private endpoint = '/book';
   searchTitle$ = new BehaviorSubject<string>('');
-  // searchTitle$ = new Observable<string>((subscriber) => {
-  //   subscriber.next('1');
-  //   subscriber.next('2');
-  //   subscriber.next('3');
-  // });
 
   constructor(private apiService: ApiService) { }
 
