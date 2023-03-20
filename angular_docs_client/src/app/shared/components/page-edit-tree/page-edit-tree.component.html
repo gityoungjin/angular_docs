@@ -1,0 +1,30 @@
+<div>
+  <div class="logo-container">
+    <div class="logo-wrapper">
+      <span class="logo" routerLink="/">DDATZZIDOCS</span>
+    </div>
+    <div class="logo-wrapper">
+      <app-button (clicked)="createPage()" [label]="' + 문서 추가'"/>
+    </div>
+  </div>
+  
+  <ng-container *ngIf="book">
+    <div class="page" appPageTreePicker [pageId]="book._id" routerLink="/edit/book/{{book._id}}">
+      {{book.title | ellipsis: 20}}
+    </div>
+  </ng-container>
+  
+  
+  <ng-template #recursiveList let-nodes>
+    <ng-container *ngFor="let node of nodes">
+      <div class="page" appPageTreePicker [pageId]="node._id" routerLink="/edit/page/{{node._id}}" [ngStyle]="{'padding-left': (node.level * 17) + 'px'}">
+        {{node.title | ellipsis: 20}}
+      </div>
+      <ng-container *ngIf="node?.children?.length > 0">
+        <ng-container *ngTemplateOutlet="recursiveList; context: {$implicit: node.children}"></ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-template>
+  
+  <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: pageList}"></ng-container>
+</div>

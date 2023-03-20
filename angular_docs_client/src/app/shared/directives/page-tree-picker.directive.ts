@@ -3,9 +3,9 @@ import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@
 import { filter, first } from 'rxjs';
 
 @Directive({
-  selector: '[appPagePicker]'
+  selector: '[appPageTreePicker]'
 })
-export class PagePickerDirective implements OnDestroy, OnInit{
+export class PageTreePickerDirective implements OnDestroy, OnInit{
   
   // 현재 page id(== book id)
   @Input('pageId')

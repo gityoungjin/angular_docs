@@ -1,0 +1,31 @@
+<div *ngIf="book">
+
+  <div class="title-container">
+    <div class="title-wrapper-left">
+      <h2 class="title">{{book.title}}</h2>
+    </div>
+    <div class="title-wrapper-right">
+      <app-button routerLink="/edit/book/{{book._id}}" [label]="'책 수정'"></app-button>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="content">
+    <div class="book-intro" style="color: #808080; margin: 20px 0 20px 0; box-sizing: border-box; font-size: 15px; min-height: 150px;">
+      <div class="book-img-box" style="margin-right: 20px; width: 110px; height: 140px; border: 1px solid #ccc; padding: 5px; position: relative; float: left;">
+        <img class="book-img" style="position: absolute; top: 0; bottom: 0; left: 0;right: 0;margin: auto; text-align: center; max-width: 100px;">
+      </div>
+      <div class="book-info" style="float: left; margin-top: 3px; box-sizing: border-box;">
+        <div class="book-info-row" style="box-sizing: border-box;">지은이 : {{book.author}}</div>
+        <div class="book-info-row">최종 편집일시 : {{book.updatedAt | date:'yyyy년 MM월 dd일 h:MM a'}}</div>
+      </div>
+    </div>
+
+    <p class="book-description" style="clear: both; margin-top: 20px;">{{book.description}}</p>
+  </div>
+
+
+  <hr/>
+
+</div>

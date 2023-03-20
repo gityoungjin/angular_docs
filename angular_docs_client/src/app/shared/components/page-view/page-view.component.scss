@@ -9,8 +9,8 @@ th {
   vertical-align: top;
 }
 
-.buttonArea {
-  float: right;
+.content {
+  margin: 20px 0px 20px 0px;
 }
 
 .title {
@@ -32,4 +32,10 @@ th {
   flex: 1;
   display: inline-block;
   text-align: right;
+}
+
+.latest-updated-msg {
+  font-size: 12px;
+  text-align: right;
+  margin: 20px 0px 20px 0px;
 }

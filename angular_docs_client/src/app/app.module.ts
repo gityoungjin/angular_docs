@@ -13,10 +13,9 @@ import { MaterialModule } from './material/material.module';
 import { BookListComponent } from './shared/components/book-list/book-list.component';
 import { BookListCardComponent } from './shared/components/book-list-card/book-list-card.component';
 import { PaginatorComponent } from './shared/components/paginator/paginator.component';
-import { PageTreeComponent } from './shared/components/page-tree/page-tree.component';
+import { PageEditTreeComponent } from './shared/components/page-edit-tree/page-edit-tree.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { EditComponent } from './feature/edit/edit.component';
-import { PagePickerDirective } from './shared/components/page-tree/page-picker.directive'
 import { QuillModule } from 'ngx-quill';
 import { EllipsisPipe } from './shared/pipes/ellipsis.pipe';
 import { ButtonComponent } from './shared/components/button/button.component';
@@ -26,6 +25,11 @@ import { SelectComponent } from './shared/components/select/select.component';
 import { BookEditComponent } from './shared/components/book-edit/book-edit.component';
 import { PageEditComponent } from './shared/components/page-edit/page-edit.component';
 import { ViewComponent } from './feature/view/view.component';
+import { PageViewComponent } from './shared/components/page-view/page-view.component';
+import { BookViewComponent } from './shared/components/book-view/book-view.component';
+import { PageViewTreeComponent } from './shared/components/page-view-tree/page-view-tree.component';
+import { PageTreePickerDirective } from './shared/directives/page-tree-picker.directive';
+import { CommonModule, registerLocaleData } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,8 @@ import { ViewComponent } from './feature/view/view.component';
     
     // page
     PageEditComponent,
-    PageTreeComponent,
+    PageEditTreeComponent,
+    PageViewTreeComponent,
     
     // layout
     FooterComponent,
@@ -64,7 +69,9 @@ import { ViewComponent } from './feature/view/view.component';
     EllipsisPipe,
     
     // directive
-    PagePickerDirective,  // page의 특정 컴포넌트에서만 사용하기 때문에 이곳에 둘 이유가 없음
+    PageTreePickerDirective,
+    PageViewComponent,
+    BookViewComponent,
     // ______________________________________________________shared
   ],
   imports: [
@@ -74,6 +81,7 @@ import { ViewComponent } from './feature/view/view.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    CommonModule,
     QuillModule.forRoot(),
   ],
   providers: [],

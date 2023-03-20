@@ -1,5 +1,15 @@
 <div *ngIf="page">
-  <h2 class="title">{{pageTitle}}</h2><label class="proc-title">페이지 수정</label>
+
+  <div class="title-container">
+    <div class="title-wrapper-left">
+      <h2 class="title">{{pageTitle}} <label style="font-size: 13px; color: rgba(128, 128, 128, 0.7);">페이지 수정</label></h2>
+    </div>
+    <div class="title-wrapper-right">
+      <app-button routerLink="/view/page/{{page._id}}" [label]="'페이지로 돌아가기'"></app-button>
+    </div>
+  </div>
+
+  
 
   <hr />
   

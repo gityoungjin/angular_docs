@@ -1,0 +1,20 @@
+* {
+  background-color: white;
+}
+
+.edit-wrapper {
+  display: flex; 
+  border: 1px solid #ccc;
+}
+
+.edit-side {
+  flex: 1; 
+  border-right: 1px solid #ccc; 
+  box-sizing: border-box; 
+  overflow-x: scroll;
+}
+
+.edit-content {
+  flex: 4; 
+  padding: 15px 60px 15px 60px;
+}

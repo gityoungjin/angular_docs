@@ -6,8 +6,7 @@ import { HomeComponent } from './feature/home/home.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent, loadChildren: () => import("./feature/home/home.routing.module").then((m) => m.HomeRoutingModule) },
-  { path: ':id', component: ViewComponent },
-  { path: 'page/:id', component: ViewComponent },
+  { path: 'view', component: ViewComponent, loadChildren: () => import("./feature/view/view.routing.module").then((m) => m.ViewRoutingModule)},
   { path: 'edit', component: EditComponent, loadChildren: () => import("./feature/edit/edit.routing.module").then((m) => m.EditRoutingModule)},
 ];
 

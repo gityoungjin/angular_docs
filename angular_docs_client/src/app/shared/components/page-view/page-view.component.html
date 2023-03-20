@@ -1,0 +1,26 @@
+<div *ngIf="page">
+
+  <div class="title-container">
+    <div class="title-wrapper-left">
+      <h2 class="title">{{page.title}}</h2>
+    </div>
+    <div class="title-wrapper-right">
+      <app-button routerLink="/edit/page/{{page._id}}" [label]="'페이지 수정'"></app-button>
+    </div>
+  </div>
+
+  <hr />
+  
+  <div class="content">
+    <div *ngIf="safeContent" [innerHTML]="safeContent"></div>
+    <div *ngIf="!safeContent">
+      🙅‍♂️ 내용이 없습니다.
+    </div>
+
+    <div class="latest-updated-msg">
+      <span>마지막 편집일시 : {{page.updatedAt | date:'yyyy년 MM월 dd일 HH:MM a'}}</span>
+    </div>
+  </div>
+  
+  <hr />
+</div>
