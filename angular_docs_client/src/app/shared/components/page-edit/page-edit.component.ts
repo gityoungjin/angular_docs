@@ -15,7 +15,7 @@ export class PageEditComponent implements OnInit {
   pageTitle!: string; // 페이지 제목
   routeParam!: any;   // 라우트 파라미터
   subPageList!: any;  // 자신을 제외한 모든 페이지 목록 ( 부모 페이지 셀렉트박스 )
-  pageTree!: any;         // 현재 페이지의 부모페이지들 트리
+  pageTree!: any;     // 현재 페이지의 부모페이지들 트리
 
   constructor(
     private apiService: ApiService, 

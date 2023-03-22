@@ -32,8 +32,8 @@
   <hr />
   
   <div class="content">
-    <div *ngIf="safeContent" [innerHTML]="safeContent"></div>
-    <div *ngIf="!safeContent">
+    <quill-view *ngIf="page.content" [content]="page.content"></quill-view>
+    <div *ngIf="!page.content">
       🙅‍♂️ 내용이 없습니다.
     </div>
 

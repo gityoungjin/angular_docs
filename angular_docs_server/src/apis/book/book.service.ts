@@ -55,7 +55,6 @@ export class BookService {
         }
       }
     ])
-    console.log(pageList)
     // const pageList = await this.pageModel.find({bookId: book._id, deletedAt: null}).sort({title: 1, level: 1})
 
     return {book, pageList};
@@ -94,7 +93,7 @@ export class BookService {
 
   // 삭제
   async deleteBook(_id: string): Promise<any> {
-    return await this.bookModel.findByIdAndDelete(_id);
+    return await this.bookModel.findByIdAndUpdate(_id,{deletedAt: new Date()})
   }
 
 }

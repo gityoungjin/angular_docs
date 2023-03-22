@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/core/services/api.service';
 
@@ -13,7 +13,7 @@ export class BookEditComponent implements OnInit {
   routeParam!: any; // 라우트 파라미터
   bookTitle!: string; // 페이지 제목
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute){}
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router){}
 
   ngOnInit(): void {
 
@@ -46,6 +46,19 @@ export class BookEditComponent implements OnInit {
         location.reload()
       }
       // () => this.dataTransferService.transferData({...formData, _id: this.page._id})
+    )
+  }
+
+  // 책삭제
+  delete() {
+    if ( !confirm("책을 삭제하시겠습니까?") ) {
+      return;
+    }
+
+    this.apiService.delete(`/book/${this.book._id}`).subscribe(
+      () => {
+        this.router.navigateByUrl('/');
+      }
     )
   }
 

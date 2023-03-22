@@ -10,6 +10,7 @@
     </div>
     <div class="title-wrapper-right">
       <app-button routerLink="/view/book/{{book._id}}" [label]="'책으로 돌아가기'"></app-button>
+      <app-button [label]="'책 삭제'" (clicked)="delete()"></app-button>
     </div>
   </div>
 
