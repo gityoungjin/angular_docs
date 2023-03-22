@@ -32,10 +32,10 @@
   <hr />
   
   <div class="content">
-    <quill-view *ngIf="page.content" [content]="page.content"></quill-view>
-    <div *ngIf="!page.content">
+    <span [innerHTML]="page.content"></span>
+    <span *ngIf="!page.content">
       🙅‍♂️ 내용이 없습니다.
-    </div>
+    </span>
 
     <div class="latest-updated-msg">
       <span>마지막 편집일시 : {{page.updatedAt | date:'yyyy년 MM월 dd일 HH:MM a'}}</span>
