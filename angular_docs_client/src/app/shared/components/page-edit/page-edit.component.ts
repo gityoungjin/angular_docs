@@ -10,10 +10,12 @@ import { ApiService } from 'src/app/core/services/api.service';
 })
 export class PageEditComponent implements OnInit {
 
+  book: any;
   page!: any;         // 페이지 상세
   pageTitle!: string; // 페이지 제목
   routeParam!: any;   // 라우트 파라미터
   subPageList!: any;  // 자신을 제외한 모든 페이지 목록 ( 부모 페이지 셀렉트박스 )
+  pageTree!: any;     // 현재 페이지의 부모페이지들 트리
 
   constructor(
     private apiService: ApiService, 
@@ -33,6 +35,8 @@ export class PageEditComponent implements OnInit {
         this.getSubPageList();
         // 페이지 상세정보 조회
         this.getPageEditData();
+        this.getData();
+        this.getPageTree();
       }
     )
 
@@ -60,6 +64,25 @@ export class PageEditComponent implements OnInit {
           },
           ...this.subPageList,
         ]
+      }
+    )
+  }
+
+  // 페이지 상세 정보 조회
+  getData() {
+    this.apiService.get(`/page/${this.routeParam}`).subscribe(
+      (data) => {
+        this.page = data;
+      }
+    )
+  }
+
+  // 부모 페이지 및 최상위 북 조회
+  getPageTree() {
+    this.apiService.get(`/page/tree-pages/${this.routeParam}`).subscribe(
+      (data: any) => {
+        this.pageTree = data.pages;
+        this.book = data.book;
       }
     )
   }

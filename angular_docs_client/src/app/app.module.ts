@@ -16,7 +16,7 @@ import { PaginatorComponent } from './shared/components/paginator/paginator.comp
 import { PageEditTreeComponent } from './shared/components/page-edit-tree/page-edit-tree.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { EditComponent } from './feature/edit/edit.component';
-import { QuillModule } from 'ngx-quill';
+import { QuillModule, QUILL_CONFIG_TOKEN } from 'ngx-quill';
 import { EllipsisPipe } from './shared/pipes/ellipsis.pipe';
 import { ButtonComponent } from './shared/components/button/button.component';
 import { InputTextComponent } from './shared/components/input-text/input-text.component';
@@ -30,6 +30,7 @@ import { BookViewComponent } from './shared/components/book-view/book-view.compo
 import { PageViewTreeComponent } from './shared/components/page-view-tree/page-view-tree.component';
 import { PageTreePickerDirective } from './shared/directives/page-tree-picker.directive';
 import { CommonModule, registerLocaleData } from '@angular/common';
+import hljs from 'highlight.js';
 
 @NgModule({
   declarations: [
@@ -82,9 +83,23 @@ import { CommonModule, registerLocaleData } from '@angular/common';
     BrowserAnimationsModule,
     MaterialModule,
     CommonModule,
-    QuillModule.forRoot(),
+    QuillModule.forRoot({
+      modules: {
+        syntax: {
+          highlight: (text: string) => hljs.highlightAuto(text).value,
+        },
+      },
+      theme: 'snow'
+    }),
   ],
-  providers: [],
+  providers: [
+    // {
+    //   provide: HIGHLIGHT_OPTIONS,
+    //   useValue: {
+    //     fullLibraryLoader: () => import('highlight.js'),
+    //   }
+    // }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,25 @@
 <div *ngIf="page">
 
+  <div class="page-depth">
+    <ol class="page-list">
+      <li>
+        <a *ngIf="book" class="title-book" routerLink="/edit/book/{{book._id}}">
+          {{book.title}}
+        </a>
+      </li>
+      <ng-container *ngFor="let page of pageTree">
+        <li class="title-div">&nbsp;/&nbsp;</li>
+        <li>
+          <a class="title-page" routerLink="/edit/page/{{page._id}}">
+            {{page.title}}
+          </a>
+        </li>
+      </ng-container>
+    </ol>
+    
+    <span class="logo" routerLink="/">DDATZZIDOCS</span>
+  </div>
+
   <div class="title-container">
     <div class="title-wrapper-left">
       <h2 class="title">{{pageTitle}} <label style="font-size: 13px; color: rgba(128, 128, 128, 0.7);">페이지 수정</label></h2>
