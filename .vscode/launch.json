@@ -1,0 +1,21 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "WebApplication",
+      "request": "launch",
+      "mainClass": "com.ddatzzi.WebApplication"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-DdatzziApplication<ddatzzi>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.ddatzzi.ddatzzi.DdatzziApplication",
+      "projectName": "ddatzzi",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=57159 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=ddatzzi"
+    }
+  ]
+}
