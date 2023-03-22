@@ -11,6 +11,7 @@ export class BookEditComponent implements OnInit {
 
   book!: any;       // book 상세
   routeParam!: any; // 라우트 파라미터
+  bookTitle!: string; // 페이지 제목
 
   constructor(private apiService: ApiService, private route: ActivatedRoute){}
 
@@ -23,7 +24,10 @@ export class BookEditComponent implements OnInit {
 
     // 북정보 조회
     this.apiService.get(`/book/${this.routeParam}`).subscribe(
-      (value) => this.book = value
+      (value) => {
+        this.book = value;
+        this.bookTitle = this.book.title;
+      }
     )
     
   }

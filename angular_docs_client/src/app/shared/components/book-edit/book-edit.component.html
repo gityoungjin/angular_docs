@@ -1,8 +1,12 @@
 <div *ngIf="book">
 
+  <div class="page-depth">
+    <span class="logo" routerLink="/">DDATZZIDOCS</span>
+  </div>
+
   <div class="title-container">
     <div class="title-wrapper-left">
-      <h2 class="title">{{book.title}} <label style="font-size: 13px; color: rgba(128, 128, 128, 0.7);">책 수정</label></h2>
+      <h2 class="title">{{bookTitle}} <label style="font-size: 13px; color: rgba(128, 128, 128, 0.7);">책 수정</label></h2>
     </div>
     <div class="title-wrapper-right">
       <app-button routerLink="/view/book/{{book._id}}" [label]="'책으로 돌아가기'"></app-button>

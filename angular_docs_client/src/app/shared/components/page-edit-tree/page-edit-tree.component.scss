@@ -13,28 +13,3 @@ a {
   cursor: pointer;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-
-.logo-container {
-  height: 50px; 
-  display: flex; 
-  border-bottom: 1px solid #ccc;
-}
-
-.logo-wrapper {
-  display: inline-block; 
-  height: 100%; 
-  flex: 1; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-}
-
-.logo {
-  color: #888; 
-  font-size: 14px; 
-  cursor: pointer;
-}
-
-.logo:hover {
-  color: black;
-}
