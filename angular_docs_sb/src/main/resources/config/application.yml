@@ -1,0 +1,87 @@
+spring:
+  profiles:
+    active: localgroup
+
+---
+
+spring:
+  profiles:
+    group:
+      localgroup: common, local
+
+---
+
+spring:
+  profiles:
+    group:
+      localgroup: common, dev
+
+---
+
+spring:
+  profiles:
+    group:
+      localgroup: common, prod
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: common
+  thymeleaf: 
+    enabled: false
+  servlet:
+    multipart:
+      enabled: false
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  data:
+    mongodb:
+      uri: mongodb+srv://heruheru:rimworld@heruheru.4yzkrxc.mongodb.net/?retryWrites=true&w=majority
+      username: heruheru
+      password: rimworld
+      database: mydb
+server:
+  port: 8080
+env:
+  server-url: http://localhost:8080
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  data:
+    mongodb:
+      uri: mongodb+srv://heruheru:rimworld@heruheru.4yzkrxc.mongodb.net/?retryWrites=true&w=majority
+      username: heruheru
+      password: rimworld
+      database: mydb
+server:
+  port: 8080
+env:
+  server-url: http://localhost:8080
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  data:
+    mongodb:
+      uri: mongodb+srv://heruheru:rimworld@heruheru.4yzkrxc.mongodb.net/?retryWrites=true&w=majority
+      username: heruheru
+      password: rimworld
+      database: mydb
+server:
+  port: 8080
+env:
+  server-url: http://localhost:8080

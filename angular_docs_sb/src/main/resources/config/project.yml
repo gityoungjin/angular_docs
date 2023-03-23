@@ -1,0 +1,42 @@
+spring:
+  config:
+    activate:
+      on-profile: common
+
+project:
+  setting:
+    charset: UTF-8
+    max-upload-size: 1536 # 1536 mb(1.5gb)
+
+api:
+  url: /api
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+
+# api:
+#   host: http//localhost:4200
+
+---
+
+spring:
+  config: 
+    activate:
+      on-profile: dev
+
+# api:
+#   host: http//localhost:4200
+
+---
+
+spring:
+  config: 
+    activate:
+      on-profile: prod
+
+# api:
+#   host: http//localhost:4200
