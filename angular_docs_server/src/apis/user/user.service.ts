@@ -134,7 +134,7 @@ export class UserService {
 
     // 로그인을 위한 메일 인증
     async _sendMailSingup(email: string, verifyToken: string) {
-        const baseUrl = "http://localhost:8080";
+        const baseUrl = "http://localhost:8081";
         const url = `${baseUrl}/users/email-verify?signupVerifyToken=${verifyToken}`;
         const subject = "TOMODDATZZI 가입 인증 메일.";
         const html = 
