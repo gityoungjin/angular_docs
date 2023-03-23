@@ -1,0 +1,49 @@
+.signin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+mat-card {
+  width: 400px;
+}
+mat-card-header {
+  justify-content: center;
+}
+
+.signin-title {
+  text-align: center;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signin-field {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.mat-form-field-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-form-field-infix {
+  width: calc(100% - 32px);
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+.signin-actions {
+  display: flex;
+  justify-content: center;
+}
+

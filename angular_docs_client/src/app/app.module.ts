@@ -31,6 +31,9 @@ import { PageViewTreeComponent } from './shared/components/page-view-tree/page-v
 import { PageTreePickerDirective } from './shared/directives/page-tree-picker.directive';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import hljs from 'highlight.js';
+import { LayoutModule } from '@angular/cdk/layout';
+import { SigninComponent } from './shared/components/sign-in/signin.component';
+import { SignupComponent } from './shared/components/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -45,34 +48,36 @@ import hljs from 'highlight.js';
     HomeContentComponent,
     HomeHeaderComponent,
     HomeFooterComponent,
-    
+
     // book
     BookEditComponent,
     BookListComponent,
     BookListCardComponent,
-    
+
     // page
     PageEditComponent,
     PageEditTreeComponent,
     PageViewTreeComponent,
-    
+
     // layout
     FooterComponent,
-    
+
     // etc
     ButtonComponent,
     InputTextComponent,
     TextareaComponent,
     SelectComponent,
     PaginatorComponent,
-    
+
     // pipe
     EllipsisPipe,
-    
+
     // directive
     PageTreePickerDirective,
     PageViewComponent,
     BookViewComponent,
+    SigninComponent,
+    SignupComponent,
     // ______________________________________________________shared
   ],
   imports: [
@@ -82,6 +87,7 @@ import hljs from 'highlight.js';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    LayoutModule,
     CommonModule,
     QuillModule.forRoot({
       modules: {
