@@ -27,6 +27,12 @@ export class BookListComponent {
   constructor(private bookService: BookApiService, private cdref: ChangeDetectorRef, private router: Router) { }
 
   ngOnInit(): void {
+    // this.bookService.getBooks(searchTitle).subscribe(books => {
+    //   this.books = books;
+    //   console.log(books);
+    //   // ExpressionChangedAfterItHasBeenCheckedError 방지
+    //   this.cdref.detectChanges();
+    // });
     this.fetchBooks('');
     if (this.searchOptions?.title) {
       //1. 그냥 api요청
@@ -36,7 +42,7 @@ export class BookListComponent {
       // ).subscribe(searchTitle => {
       //   this.fetchBooks(searchTitle);
       // });
-      
+
       //2. combineLatest 사용해서 필터링
       const searchTitle$ = this.bookService.searchTitle$.pipe(
         map(searchTitle => searchTitle ? searchTitle.trim().toLowerCase() : ''),
@@ -55,7 +61,7 @@ export class BookListComponent {
       );
       //3. switchMap 사용해서 필터링
       // switchMap: Observable을 Observable로 맵핑할때 사용
-      
+
       // this.books$ = this.books$.pipe(
       //   switchMap(books => this.bookService.searchTitle$.pipe(
       //     map(searchTitle => searchTitle ? searchTitle.trim().toLowerCase() : ''),
