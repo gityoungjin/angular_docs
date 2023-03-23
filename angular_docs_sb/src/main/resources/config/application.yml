@@ -7,21 +7,21 @@ spring:
 spring:
   profiles:
     group:
-      localgroup: common, local
+      localgroup: common,local
 
 ---
 
 spring:
   profiles:
     group:
-      localgroup: common, dev
+      devgroup: common,dev
 
 ---
 
 spring:
   profiles:
     group:
-      localgroup: common, prod
+      prodgroup: common,prod
 
 ---
 
@@ -44,9 +44,7 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://heruheru:rimworld@heruheru.4yzkrxc.mongodb.net/?retryWrites=true&w=majority
-      username: heruheru
-      password: rimworld
-      database: mydb
+      database: test
 server:
   port: 8080
 env:
@@ -60,10 +58,7 @@ spring:
       on-profile: dev
   data:
     mongodb:
-      uri: mongodb+srv://heruheru:rimworld@heruheru.4yzkrxc.mongodb.net/?retryWrites=true&w=majority
-      username: heruheru
-      password: rimworld
-      database: mydb
+      uri: mongodb+srv://heruheru:rimworld1@heruheru.4yzkrxc.mongodb.net/?retryWrites=true&w=majority
 server:
   port: 8080
 env:

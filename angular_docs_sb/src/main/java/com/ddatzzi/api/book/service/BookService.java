@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ddatzzi.api.book.Repository.BookRepository;
-import com.ddatzzi.api.book.vo.BookVO;
+import com.ddatzzi.api.book.vo.Book;
 
 @Service
 public class BookService {
@@ -15,7 +15,7 @@ public class BookService {
   @Autowired
   private BookRepository bookRepository;
 
-  public List<BookVO> selectBookList(String title) {
+  public List<Book> selectBookList(String title) {
     return bookRepository.selectBookList(title);
   }
 

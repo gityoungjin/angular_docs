@@ -1,12 +1,16 @@
 package com.ddatzzi.api.book.vo;
 
-import java.sql.Date;
+import java.util.Date;
+
+import org.springframework.data.annotation.Id;
 
 import lombok.Data;
 
 @Data
-public class BookVO {
+public class Book {
   
+  @Id
+  private String id;
   private String title;
   private String description;
   private String author;

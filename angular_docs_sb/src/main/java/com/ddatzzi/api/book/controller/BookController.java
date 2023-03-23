@@ -11,10 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ddatzzi.api.book.service.BookService;
-import com.ddatzzi.api.book.vo.BookVO;
+import com.ddatzzi.api.book.vo.Book;
 
 @RestController
 @RequestMapping()
@@ -23,12 +24,11 @@ public class BookController {
   @Autowired
   private BookService bookService;
   
+  @ResponseBody
   @GetMapping(value = "/")
-  public ResponseEntity<List<BookVO>> selectBookList(HttpServletRequest requset, HttpServletResponse response, @Param("title") String title) throws Exception {
-    System.out.println(title);
-    List<BookVO> data = bookService.selectBookList(title);
-    System.out.println(data);
-    return new ResponseEntity<List<BookVO>>(data, HttpStatus.OK);
+  public ResponseEntity<List<Book>> selectBookList(HttpServletRequest requset, HttpServletResponse response, @Param("title") String title) throws Exception {
+    List<Book> data = bookService.selectBookList(title);
+    return new ResponseEntity<List<Book>>(data, HttpStatus.OK);
   }
 
 }
