@@ -26,7 +26,14 @@ export class SignupComponent {
       name: new FormControl('', [
         Validators.required,
       ]),
+      location: new FormControl('', [
+      ]),
     });
+
+  }
+  onSubmit(){
+    console.log(this.userForm.value);
+    
   }
 
 }
