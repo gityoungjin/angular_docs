@@ -5,22 +5,60 @@
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="userForm" class="signup-form" novalidate>
-      <mat-form-field class="signup-field">
-        <input matInput placeholder="Username" required>
-      </mat-form-field>
         <mat-form-field class="signup-field">
-          <input matInput placeholder="Password" type="password" required>
+          <mat-label>Enter your username</mat-label>
+          <input matInput formControlName="username" placeholder="Username">
+          <mat-error *ngIf="userForm.get('username')?.errors">
+            {{
+            userForm.get('username')?.errors?.['required']
+            ? 'Username is required'
+            : 'Username must be 4-15 characters long and contain only letters and numbers.'
+            }}
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="signup-field">
-          <input matInput placeholder="Confirm Password" type="password" required>
+          <mat-label>Enter your password</mat-label>
+          <input matInput formControlName="password" placeholder="Password" type="password">
+          <mat-error *ngIf="userForm.get('password')?.errors">
+            {{
+            userForm.get('password')?.errors?.['required']
+            ? 'Password is required'
+            : 'Password must be at least 6 characters long'
+            }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="signup-field">
+          <mat-label>Confirm your password</mat-label>
+          <input matInput formControlName="confirmPassword" placeholder="Confirm Password" type="password">
+          <mat-error *ngIf="userForm.get('confirmPassword')?.errors">
+            {{
+            userForm.get('confirmPassword')?.errors?.['required']
+            ? 'Password confirmation is required'
+            : 'Password and confirmation must match.'}}
+          </mat-error>
         </mat-form-field>
         <mat-form-field class="signup-field">
           <mat-label>Enter your email</mat-label>
-          <input matInput placeholder="likeyuna@site.net" pattern="" required>
-          <!-- <mat-error *ngIf="email.invalid">{{email.errors|json}}</mat-error> -->
+          <input matInput formControlName="email" placeholder="likeyuna@site.net">
+          <mat-error *ngIf="userForm.get('email')?.errors">
+            {{
+            userForm.get('email')?.errors?.['required']
+            ? 'Email is required'
+            : 'Email is invalid'
+            }}
+          </mat-error>
         </mat-form-field>
+
         <mat-form-field class="signup-field">
-          <input matInput ngModel placeholder="Name" required>
+          <mat-label>Enter your name</mat-label>
+          <input matInput formControlName="name" placeholder="Name">
+          <mat-error *ngIf="userForm.get('name')?.errors">
+            {{
+            userForm.get('name')?.errors?.['required']
+            ? 'Name is required'
+            : ''
+            }}
+          </mat-error>
         </mat-form-field>
       </form>
     </mat-card-content>
