@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -7,5 +7,25 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
+  userForm!: FormGroup;
+
+  ngOnInit() {
+    this.userForm = new FormGroup({
+      username: new FormControl('', [
+        Validators.required,
+        Validators.pattern('[a-zA-Z0-9]{4,15}')
+      ]),
+      passwordGroup: new FormGroup({
+        password: new FormControl('', Validators.required),
+        confirmPassword: new FormControl('', Validators.required)
+      }),
+      email: new FormControl('', [
+        Validators.required,
+      ]),
+      name: new FormControl('', [
+        Validators.required,
+      ]),
+    });
+  }
 
 }
