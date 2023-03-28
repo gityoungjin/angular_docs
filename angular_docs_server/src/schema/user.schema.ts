@@ -35,6 +35,10 @@ export class User {
 
     @Prop({ type: mongoose.Schema.Types.Date })
     updatedAt: Date;
+
+    @Prop({ type: mongoose.Schema.Types.Date, default: null })
+    deletedAt: Date;
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

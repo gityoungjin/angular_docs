@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './feature/home/home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeHeaderComponent } from './shared/components/home-header/home-header.component';
 import { HomeFooterComponent } from './shared/components/home-footer/home-footer.component';
@@ -89,6 +89,7 @@ import { SignupComponent } from './shared/components/signup/signup.component';
     MaterialModule,
     LayoutModule,
     CommonModule,
+    ReactiveFormsModule,
     QuillModule.forRoot({
       modules: {
         syntax: {
