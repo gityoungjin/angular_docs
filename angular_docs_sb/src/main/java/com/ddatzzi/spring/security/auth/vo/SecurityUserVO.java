@@ -1,6 +1,5 @@
 package com.ddatzzi.spring.security.auth.vo;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -14,7 +13,10 @@ public class SecurityUserVO implements UserDetails {
 
   private String username;
   private String password;
+  private String sessReqService;  // 사용자(USER) / 관리자(MGR) 서비스 구분
   private List<GrantedAuthority> authorities;
+  private String userId; // ip
+  private String sessionId; // session-id
 
   // 문자열 auth에 해당하는 권한을 가지고 있으면 true, 그렇지 않으면 false 반환.
   public boolean hasAuth(String auth) {

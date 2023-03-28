@@ -15,14 +15,22 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.ddatzzi.spring.security.auth.service.SecurityDataService;
 import com.ddatzzi.spring.security.auth.service.SecurityUserDetailsService;
+import com.ddatzzi.spring.security.authentication.SecureHttpConfigurer;
+import com.ddatzzi.spring.security.handler.SecureAuthenticationFailureHandler;
+import com.ddatzzi.spring.security.handler.SecureAuthenticationSuccessHandler;
 import com.ddatzzi.spring.security.metadata.ReloadableFilterInvocationSecuritymetadataSource;
 import com.ddatzzi.spring.security.metadata.UrlAndRoleResourcesMapLoader;
 
@@ -48,6 +56,8 @@ public class SecurityConfiguration {
   // 스프링 시큐리티의 인증 관련 구성을 설정하는데 사용되는 구성 요소 중 하나.
   @Autowired
   AuthenticationConfiguration authenticationConfiguration;
+
+  private SecurityDataService securityDataService;
   
   // 보안 구성을 위한 설정.
   @Bean
@@ -67,12 +77,12 @@ public class SecurityConfiguration {
      * 
      * authenticationProvider
      *    - 사용자 정보를 제공하는 provider를 설정한다.
-     *    - ⭐️⭐️⭐️⭐️⭐️⭐️ 인증 프로바이더는 인증 처리를 수행합니다. 즉, 인증 프로바이더는 사용자의 인증 정보를 검증하여 
-     *      인증에 성공하면 인증 객체(Authentication)를 생성합니다. 
-     *      이때 인증 객체는 사용자가 입력한 인증 정보와 권한 정보를 담고 있습니다. 
-     *      인증 객체는 인증이 필요한 서비스(보통은 웹 페이지)에서 사용되어 권한 부여를 수행하게 됩니다.
-     *      인증 프로바이더는 필터에서 검증된 사용자 정보를 바탕으로 인증 객체를 생성하게 됩니다. 
-     *      따라서 필터 이전에 인증 프로바이더를 적용하면 사용자 정보가 검증되지 않아 인증 객체를 생성할 수 없습니다.
+     *    - ⭐️⭐️⭐️⭐️⭐️⭐️ 인증 프로바이더는 인증 처리를 수행한다. 즉, 인증 프로바이더는 사용자의 인증 정보를 검증하여 
+     *      인증에 성공하면 인증 객체(Authentication)를 생성한다.
+     *      이때 인증 객체는 사용자가 입력한 인증 정보와 권한 정보를 담고 있고,
+     *      인증 객체는 인증이 필요한 서비스(보통은 웹 페이지)에서 사용되어 권한 부여를 수행하게 된다.
+     *      인증 프로바이더는 필터에서 검증된 사용자 정보를 바탕으로 인증 객체를 생성하게 된다.
+     *      따라서 필터 이전에 인증 프로바이더를 적용하면 사용자 정보가 검증되지 않아 인증 객체를 생성할 수 없다.
      * 
      * 1. addFilterBefore()는 Security Filter Chain에 필터를 추가하고,
      * 2. authenticationProvider()는 인증 프로바이더를 등록한 후,
@@ -91,7 +101,45 @@ public class SecurityConfiguration {
         .anyRequest().authenticated()
       );
 
+    // 로그인 성공 핸들러
+    AuthenticationSuccessHandler authenticationSuccessHandler = authenticationSuccessHandler();
+    // 로그인 실패 핸들러
+    AuthenticationFailureHandler authenticationFailureHandler = authenticationFailureHandler();
+    // SecureUsernamePasswordAuthenticationFilter를 추가한다.
+    http.apply(SecureHttpConfigurer.customDsl(authenticationSuccessHandler, authenticationFailureHandler));
+
+    // 세션 설정
+    http.sessionManagement()
+      // 세션 만료 시간 없음
+      .maximumSessions(-1) 
+      // 동시 세션 방지
+      .maxSessionsPreventsLogin(true)
+      // 세션의 생성 및 파괴 이벤트를 수신하기 위한 sessionRegistry를 등록.
+      .sessionRegistry(sessionRegistry())
+      // 세션 만료시 리디렉션할 url 설정
+      .expiredUrl("/expired");
+
+    // 세션 고정 공격 : 악의적인 공격자가 인증된 세션ID를 탈취하여 사용자를 위조하고 보안을 침해하는 공격
+    http.sessionManagement()
+      // 세션 고정 공격 방지하도록 설정 - 새로운 세션 ID를 생성함.
+      .sessionFixation()
+      // 세션 고정 공격 방지하도록 설정 - 인증전에 새 세션을 생성하고 기존 세션의 속성을 새 세션으로 이전한다.
+      .migrateSession();
+
+    // 동일 도메인에서 iframe접근이 가능하도록 설정. (RESTful은 필요없음)
+    http.headers().frameOptions().sameOrigin();
+
     return http.build();
+  }
+
+  @Bean
+  public AuthenticationSuccessHandler authenticationSuccessHandler() {
+    return new SecureAuthenticationSuccessHandler(securityDataService);
+  }
+
+  @Bean
+  public AuthenticationFailureHandler authenticationFailureHandler() {
+    return new SecureAuthenticationFailureHandler();
   }
 
   // _________________________________________________________________________________ FilterSecurityInterceptor
@@ -221,6 +269,12 @@ public class SecurityConfiguration {
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder(10);
+  }
+
+  // sessionRegistry
+  @Bean
+  public SessionRegistry sessionRegistry() {
+    return new SessionRegistryImpl();
   }
 
 }
